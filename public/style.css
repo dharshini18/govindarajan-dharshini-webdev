@@ -1,6 +1,7 @@
 body {
+    height: 100%;
+    width: 100%;
     background-image: url(bg.jpeg);
-
     -moz-background-size: cover;
     -webkit-background-size: cover;
     background-size: cover;
