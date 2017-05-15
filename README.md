@@ -2,5 +2,5 @@
 - Origin - Chennai, India 
 - Work Experience - 2years as a System Engineer at Tata Consultancy Services, India 
 - The GitHub repository holds the web project for the course - Web Development - CS5610 - Summer1 
-- Webdev Project -
-- Webdev Assignments -
+- Webdev Project - https://webdev-summer-17.herokuapp.com/
+- Webdev Assignments - https://github.com/dharshini18/govindarajan-dharshini-webdev
