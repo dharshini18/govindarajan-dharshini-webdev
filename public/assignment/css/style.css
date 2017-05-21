@@ -1,7 +1,21 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.or{
+    color: #9d9d9d;
+}
+
+.jumbotron{
+    background-image: url("../background/bg1.jpg");
+    background-size: cover;
+    color: white;
+}
+
 input.form-control {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top: 36px;
-}
+
