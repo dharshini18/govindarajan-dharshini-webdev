@@ -82,3 +82,8 @@ body {
 .container{
     margin-right:5px;
 }
+
+.navbar-text.pull-right{
+    margin-top: 10px;
+    margin-bottom: 45px;
+}
