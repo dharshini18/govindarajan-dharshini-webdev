@@ -9,6 +9,8 @@
     function pageService() {
         this.findPageByWebsiteId = findPageByWebsiteId;
         this.createPage = createPage;
+        this.findPageById = findPageById;
+        this.deletePage = deletePage;
 
         var pages = [
             { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
@@ -20,6 +22,17 @@
             { "_id": "098", "name": "Post 1", "websiteId": "890", "description": "Lorem" },
             { "_id": "980", "name": "Post 2", "websiteId": "567", "description": "Lorem" }
         ];
+        function deletePage(pageId) {
+            var page = findPageById(pageId);
+            var index = pages.indexOf(page);
+            pages.splice(index, 1);
+        }
+
+        function findPageById(pageId) {
+            return pages.find(function (page) {
+                return pages._id === pageId;
+            });
+        }
 
         function createPage(websiteId , page) {
             page.websiteId = websiteId + "";
