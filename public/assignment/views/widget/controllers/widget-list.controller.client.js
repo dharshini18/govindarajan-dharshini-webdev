@@ -22,6 +22,12 @@
         model.widgets = widgets;
         model.trust = trust;
         model.getYoutubeEmbedUrl = getYoutubeEmbedUrl;
+        model.widgetUrl = widgetUrl;
+
+        function widgetUrl(widget) {
+            var url = 'views/widget/templates/widget-'+widget.widgetType+'.view.client.html';
+            return url;
+        }
 
         function getYoutubeEmbedUrl(linkUrl) {
             var embedUrl = "https://www.youtube.com/embed/";

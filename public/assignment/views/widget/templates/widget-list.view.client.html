@@ -1,23 +1,4 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="../../page/page-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </p>
-
-            <a class="navbar-brand" href="#">
-                Widget List
-            </a>
-            <p class="navbar-text pull-right">
-                <a href="widget-choose.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/header.view.client.html'"></div>
 
 <div class="container-fluid">
     <div ng-repeat="widget in model.widgets" class="wd-widget">
@@ -27,91 +8,8 @@
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <div ng-switch="widget.widgetType">
-            <div ng-switch-when="HEADING" ng-switch="widget.size">
-                <h1 ng-switch-when="1">{{widget.text}}</h1>
-                <h2 ng-switch-when="2">{{widget.text}}</h2>
-                <h3 ng-switch-when="3">{{widget.text}}</h3>
-                <h4 ng-switch-when="4">{{widget.text}}</h4>
-                <h5 ng-switch-when="5">{{widget.text}}</h5>
-                <h6 ng-switch-when="6">{{widget.text}}</h6>
-            </div>
-            <div ng-switch-when="IMAGE">
-                <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
-            </div>
-            <div ng-switch-when="YOUTUBE">
-                <iframe src="{{model.getYouTubeEmbedUrl(widget.url)}}" width="{{widget.width}}" frameborder="0" allowfullscreen>
-                </iframe>
-            </div>
-            <div ng-switch-when="HTML" ng-bind-html="model.trust(widget.text)">
-            </div>
-        </div>
+        <div ng-include="model.widgetUrl(widget)"></div>
     </div>
 </div>
 
-
-<!--
-<div class="container-fluid">
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-heading-edit.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h1>GIZMODO</h1>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <h3>
-            Sleep Cool And Comfortable All Summer: Save $50 On The Breathable Casper Mattress
-        </h3>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-image-edit.view.client.html">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <img src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;JYQyMyfT&#45;&#45;/c_scale,fl_progressive,q_80,w_800/hkvwpuiqdgtn4ntb2q7z.png"/>
-    </div>
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <span class="glyphicon glyphicon-cog"></span>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-
-        <p>After a brief tease <a href="http://io9.gizmodo.com/the-first-picture-from-star-trek-discovery-explores-st-1795290281" rel="nofollow">this morning</a>, CBS have just revealed our first full look at <em>Star Trek: Discovery</em>, giving us our best glimpse at what’s to come in the future of <em>Star Trek</em>’s past.<br></p>
-        <p>Revealed at the network’s ongoing Upfronts presentation, the trailer marks the first footage from <em>Discovery</em> beyond the initial ship reveal <a href="http://io9.gizmodo.com/the-new-star-trek-tv-show-has-a-title-and-a-starship-d-1784191488" rel="nofollow">back at San Diego Comic Con last year</a>. Set before the events of the original series, <em>Discovery</em> follows the crew of the titular Federation starship, helmed by Captain Lorca (Jason Isaacs), from the perspective of its First Officer, Michael Burnham (Sonequa Martin Green). <br></p>
-
-    </div>
-    <div class="container-fluid">
-    <div class="wd-widget">
-        <div class="wd-widget-toolbar">
-            <a href="widget-youtube-edit.view.client.html">
-            <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-    </div>
-    <div class="videoWrapper">
-        <iframe width="100%" src="https://www.youtube.com/embed/rwhuzDSlgXM" frameborder="0" allowfullscreen></iframe></div>
-    </div>
-    </div>
--->
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="row navbar-text">
-            <p class="navbar-text pull-right">
-                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<div ng-include="'views/common/footer.view.client.html'"></div>
