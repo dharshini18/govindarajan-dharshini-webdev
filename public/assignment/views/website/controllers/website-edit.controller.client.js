@@ -21,8 +21,8 @@
     }
     init();
 
-    function updateWebsite(websiteId, website) {
-        websiteService.updateWebsite(websiteId,website);
+    function updateWebsite() {
+        websiteService.updateWebsite(model.websiteId,model.website);
         $location.url('/user/' +model.userId+ '/website');
     }
 

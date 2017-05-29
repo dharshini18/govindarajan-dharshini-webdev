@@ -11,6 +11,7 @@
         this.createPage = createPage;
         this.findPageById = findPageById;
         this.deletePage = deletePage;
+        this.updatePage = updatePage;
 
         var pages = [
             { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
@@ -22,6 +23,13 @@
             { "_id": "098", "name": "Post 1", "websiteId": "890", "description": "Lorem" },
             { "_id": "980", "name": "Post 2", "websiteId": "567", "description": "Lorem" }
         ];
+
+        function updatePage(pageId, page) {
+            var pageNew = findPageById(pageId);
+            var index = pages.indexOf(pageNew);
+            pages[index] = page;
+        }
+
         function deletePage(pageId) {
             var page = findPageById(pageId);
             var index = pages.indexOf(page);
@@ -35,7 +43,6 @@
         }
 
         function createPage(websiteId , page) {
-            page.websiteId = websiteId + "";
             page._id = (new Date()).getTime() + "";
             pages.push(page);
         }
