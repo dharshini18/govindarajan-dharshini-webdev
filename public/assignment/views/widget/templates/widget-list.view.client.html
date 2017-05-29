@@ -1,19 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
-    <title>Widget List</title>
-    <link href="../../bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/styleDiff.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="../page/page-list.html" class="navbar-link">
+                <a href="../../page/page-list.html" class="navbar-link">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </p>
@@ -22,7 +11,7 @@
                 Widget List
             </a>
             <p class="navbar-text pull-right">
-                <a href="widget-choose.html" class="navbar-link">
+                <a href="widget-choose.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -31,9 +20,41 @@
 </nav>
 
 <div class="container-fluid">
+    <div ng-repeat="widget in model.widgets" class="wd-widget">
+        <div class="wd-widget-toolbar">
+            <a href="widget-heading-edit.view.client.html">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADING" ng-switch="widget.size">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <img ng-src="{{widget.url}}" width="{{widget.width}}"/>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <iframe src="{{model.getYouTubeEmbedUrl(widget.url)}}" width="{{widget.width}}" frameborder="0" allowfullscreen>
+                </iframe>
+            </div>
+            <div ng-switch-when="HTML" ng-bind-html="model.trust(widget.text)">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--
+<div class="container-fluid">
     <div class="wd-widget">
         <div class="wd-widget-toolbar">
-            <a href="widget-heading-edit.html">
+            <a href="widget-heading-edit.view.client.html">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -51,12 +72,12 @@
     </div>
     <div class="wd-widget">
         <div class="wd-widget-toolbar">
-            <a href="widget-image-edit.html">
+            <a href="widget-image-edit.view.client.html">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
         </div>
-        <img src="https://i.kinja-img.com/gawker-media/image/upload/s--JYQyMyfT--/c_scale,fl_progressive,q_80,w_800/hkvwpuiqdgtn4ntb2q7z.png"/>
+        <img src="https://i.kinja-img.com/gawker-media/image/upload/s&#45;&#45;JYQyMyfT&#45;&#45;/c_scale,fl_progressive,q_80,w_800/hkvwpuiqdgtn4ntb2q7z.png"/>
     </div>
     <div class="wd-widget">
         <div class="wd-widget-toolbar">
@@ -71,7 +92,7 @@
     <div class="container-fluid">
     <div class="wd-widget">
         <div class="wd-widget-toolbar">
-            <a href="widget-youtube-edit.html">
+            <a href="widget-youtube-edit.view.client.html">
             <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon-align-justify"></span>
@@ -81,18 +102,16 @@
         <iframe width="100%" src="https://www.youtube.com/embed/rwhuzDSlgXM" frameborder="0" allowfullscreen></iframe></div>
     </div>
     </div>
+-->
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="row navbar-text">
             <p class="navbar-text pull-right">
-                <a href="../user/profile.html" class="navbar-link">
+                <a href="../../user/templates/profile.view.client.html" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>
         </div>
     </div>
 </nav>
-
-</body>
-</html>
