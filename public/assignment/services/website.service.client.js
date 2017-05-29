@@ -21,7 +21,7 @@
             { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Lorem" },
             { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Lorem" }
         ];
-        
+
         function createWebsite(website) {
             website._id = (new Date()).getTime() + "";
             websites.push(website);
