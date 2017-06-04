@@ -38,7 +38,7 @@
 
         function findPageByPageId(pageId) {
             return pages.find(function (page) {
-                return pages._id === pageId;
+                return page._id === pageId;
             });
         }
 

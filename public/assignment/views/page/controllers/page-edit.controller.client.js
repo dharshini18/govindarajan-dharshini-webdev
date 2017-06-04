@@ -27,8 +27,8 @@
         $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
     }
 
-    function updatePage(pageId,page) {
-        pageService.updatePage(pageId,page);
+    function updatePage() {
+        pageService.updatePage(model.pageId,model.page);
         $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
     }
     }

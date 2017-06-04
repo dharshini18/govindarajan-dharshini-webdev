@@ -10,11 +10,6 @@
             <a class="navbar-brand" href="#">
                 Edit Website
             </a>
-            <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite()" class="navbar-link">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
-            </p>
         </div>
     </div>
 </nav>
@@ -75,6 +70,8 @@
                       ng-model = "model.website.description"
                       class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem</textarea>
 
+            <a ng-click="model.updateWebsite()"
+               class="btn btn-block btn-success">Update</a>
             <a ng-click="model.deleteWebsite(model.websiteId)"
                class="btn btn-block btn-danger">Delete</a>
         </div>

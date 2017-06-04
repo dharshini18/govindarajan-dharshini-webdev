@@ -28,6 +28,7 @@
             var index = websites.indexOf(websiteNew);
             websites[index] = website;
         }
+
         function createWebsite(website) {
             website._id = (new Date()).getTime() + "";
             websites.push(website);
