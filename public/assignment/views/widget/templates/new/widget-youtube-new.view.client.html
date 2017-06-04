@@ -1,0 +1,56 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="../widget-list.view.client.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+
+            <a class="navbar-brand" href="#">
+                Create YouTube
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid top-space">
+
+    <label for="name">Name</label>
+    <input class="form-control"
+           placeholder="The Chainsmokers - Paris (Lyric)"
+           ng-model="widget.name"
+           id="name"/>
+
+    <label for="text">Text</label>
+    <input class="form-control"
+           placeholder="Vevo Productions"
+           ng-model="widget.text"
+           id="text"/>
+
+    <label for="text">URL</label>
+    <input class="form-control"
+           placeholder="https://www.youtube.com/watch?v=RhU9MZ98jxo"
+           ng-model="widget.url"
+           id="url"/>
+
+    <label for="text">Width</label>
+    <input class="form-control"
+           placeholder="100%"
+           ng-model="widget.width"
+           id="width"/>
+
+    <a ng-click="model.createWidget(widget,'YOUTUBE')" class="btn btn-block btn-success">Create</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <p class="navbar-text pull-right">
+                <a href="#!user/userId" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

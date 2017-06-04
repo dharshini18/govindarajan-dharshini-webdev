@@ -9,7 +9,7 @@
     function pageService() {
         this.findPageByWebsiteId = findPageByWebsiteId;
         this.createPage = createPage;
-        this.findPageById = findPageById;
+        this.findPageByPageId = findPageByPageId;
         this.deletePage = deletePage;
         this.updatePage = updatePage;
 
@@ -25,18 +25,18 @@
         ];
 
         function updatePage(pageId, page) {
-            var pageNew = findPageById(pageId);
+            var pageNew = findPageByPageId(pageId);
             var index = pages.indexOf(pageNew);
             pages[index] = page;
         }
 
         function deletePage(pageId) {
-            var page = findPageById(pageId);
+            var page = findPageByPageId(pageId);
             var index = pages.indexOf(page);
             pages.splice(index, 1);
         }
 
-        function findPageById(pageId) {
+        function findPageByPageId(pageId) {
             return pages.find(function (page) {
                 return pages._id === pageId;
             });
@@ -44,6 +44,7 @@
 
         function createPage(websiteId , page) {
             page._id = (new Date()).getTime() + "";
+            page.websiteId = websiteId;
             pages.push(page);
         }
 

@@ -55,7 +55,7 @@
         function createUser(user) {
             user._id = (new Date()).getTime() + "";
             user.created = new Date();
-            user.push(user);
+            users.push(user);
             return user;
         }
     }

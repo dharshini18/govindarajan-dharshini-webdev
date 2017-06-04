@@ -7,33 +7,22 @@
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Choose Widget
+                Create Widget
             </a>
         </div>
     </div>
 </nav>
 
 <div class="container-fluid top-space">
-    <ul class="list-group">
-        <li ng-repeat="widget in model.widgets" class="list-group-item">
-            <div class="row">
-                <div class="col-lg-5 col-md-8 col-xs-11">
-                    <a href="model.createWidget(pageId,widget)">{{widget.widgetType}}
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
+<p class="navbar-text">
+    <a ng-click="template='views/widget/templates/new/widget-image-new.view.client.html'" class="btn btn-default">Image</a>
+    <a ng-click="template='views/widget/templates/new/widget-youtube-new.view.client.html'" class="btn btn-default">YouTube</a>
+    <a ng-click="template='views/widget/templates/new/widget-heading-new.view.client.html'" class="btn btn-default">Heading</a>
+</p>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="row navbar-text">
-            <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.userId}}" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>
+<div class="container-fluid" id="myDiv">
+<ng-include src="template"></ng-include>
+</div>
+
+<div ng-include="'views/common/footer.view.client.html'"></div>

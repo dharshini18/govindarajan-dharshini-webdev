@@ -11,12 +11,14 @@
     var model = this;
     model.userId = $routeParams['userId'];
     model.websiteId = $routeParams['websiteId'];
+    model.pageId = $routeParams['pageId'];
     model.deletePage = deletePage;
     model.updatePage = updatePage;
 
     function init() {
         model.pages =
             pageService.findPageByWebsiteId(model.websiteId);
+        model.page = pageService.findPageByPageId(model.pageId);
     }
     init();
 
