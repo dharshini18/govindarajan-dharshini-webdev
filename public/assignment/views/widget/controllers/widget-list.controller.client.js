@@ -7,7 +7,7 @@
         .controller('widgetListController',widgetListController);
 
     function widgetListController($sce,$routeParams,
-                                   widgetService) {
+                                   widgetService,$location) {
         var model = this;
         model.userId = $routeParams['userId'];
         model.websiteId = $routeParams['websiteId'];
@@ -16,13 +16,12 @@
         model.getYouTubeEmbedUrl = getYouTubeEmbedUrl;
         model.trust = trust;
 
-
         function init() {
             model.widgets =
                 widgetService.findWidgetsByPageId(model.pageId);
         }
         init();
-
+        
         function widgetUrl(widget) {
             var url = 'views/widget/templates/type/widget-'+widget.widgetType+'.view.client.html';
             return url;

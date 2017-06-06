@@ -1,6 +1,3 @@
-/**
- * Created by Dharshini on 5/27/2017.
- */
 (function () {
     angular
         .module('WAM')
@@ -8,33 +5,40 @@
 
     function registerController($location, userService) {
 
-        //Variable bound to the current instance of the controllers
         var model = this;
+
         model.register = register;
 
-        function register(username,password,verifypassword) {
+        function register(username, password, password2) {
 
-            if(username === null || username === '' || typeof username ==='undefined'){
-                model.error = 'Username is required';
+            if(username === null || username === '' || typeof username === 'undefined') {
+                model.error = 'username is required';
                 return;
             }
 
-            if(password !== verifypassword || password === null || typeof password === 'undefined'){
-                model.error = "Passwords must match";
+            if(password !== password2 || password === null || typeof password === 'undefined') {
+                model.error = "passwords must match";
                 return;
             }
 
-            var found = userService.findUserByUsername(username);
-             if(found != null){
-                 model.error = "Sorry, that username is taken"
-             }else{
-                 var newUser = {
-                     username: username,
-                     password: password
-                 };
-                 newUser = userService.createUser(newUser);
-                 $location.url('/user/' + newUser._id);
-             }
+            userService
+                .findUserByUsername(username)
+                .then(
+                    function () {
+                        model.error = "Sorry, that username is taken";
+                    },
+                    function () {
+                        var newUser = {
+                            username: username,
+                            password: password
+                        };
+                        return userService
+                            .createUser(newUser);
+                    }
+                )
+                .then(function (user) {
+                    $location.url('/user/' + user._id);
+                });
         }
     }
 })();
