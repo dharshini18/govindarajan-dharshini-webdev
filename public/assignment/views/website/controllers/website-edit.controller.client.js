@@ -15,20 +15,41 @@
     model.updateWebsite = updateWebsite;
 
     function init() {
-        model.websites =
-            websiteService.findAllWebsitesForUser(model.userId);
-        model.website = websiteService.findWebsiteById(model.websiteId);
+        websiteService
+            .findAllWebsitesForUser(model.userId)
+            .then(renderWebsites);
+        websiteService
+            .findWebsiteById(model.websiteId)
+            .then(renderWebsiteById);
     }
     init();
+    
+    function renderWebsiteById(website) {
+        model.website = website;
+    }
 
-    function updateWebsite() {
-        websiteService.updateWebsite(model.websiteId,model.website);
-        $location.url('/user/' +model.userId+ '/website');
+    function renderWebsites(websites) {
+        model.websites = websites;
+    }
+
+    function updateWebsite(website) {
+        return websiteService
+            .updateWebsite(website._id, website)
+            .then(function () {
+                $location.url('/user/' +model.userId+ '/website');
+            },function () {
+                model.error = "Website Could not be updated";
+            });
     }
 
     function deleteWebsite(websiteId) {
-        websiteService.deleteWebsite(websiteId);
-        $location.url('/user/' +model.userId+ '/website');
-    }
+        return websiteService
+            .deleteWebsite(websiteId)
+            .then(function () {
+                $location.url('/user/' +model.userId+ '/website');
+            },function () {
+                model.error = "Unable to delete website";
+            })
+        }
     }
 })();

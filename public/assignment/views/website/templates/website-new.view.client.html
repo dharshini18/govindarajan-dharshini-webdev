@@ -13,7 +13,7 @@
         </div>
     </div>
 </nav>
-
+<div ng-show="model.error" class="alert alert-info">{{model.error}}</div>
 <div class="container-fluid top-space">
     <div class="row">
         <div class="col-xs-4 hidden-xs">
@@ -72,6 +72,10 @@
 
             <a ng-click="model.createWebsite(website)"
                class="btn btn-block btn-success">Create</a>
+            <a href="#!/user/{{model.userId}}/website"
+               class="btn btn-block btn-danger">
+                Cancel
+            </a>
         </div>
     </div>
 </div>

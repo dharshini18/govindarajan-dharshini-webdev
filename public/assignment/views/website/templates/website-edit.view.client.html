@@ -14,6 +14,7 @@
     </div>
 </nav>
 
+<div ng-show="model.error" class="alert alert-info">{{model.error}}</div>
 <div class="container-fluid top-space">
     <div class="row">
         <div class="col-xs-4 hidden-xs">
@@ -70,7 +71,7 @@
                       ng-model = "model.website.description"
                       class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem</textarea>
 
-            <a ng-click="model.updateWebsite()"
+            <a ng-click="model.updateWebsite(model.website)"
                class="btn btn-block btn-success">Update</a>
             <a ng-click="model.deleteWebsite(model.websiteId)"
                class="btn btn-block btn-danger">Delete</a>

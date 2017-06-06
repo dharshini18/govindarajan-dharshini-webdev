@@ -1,21 +1,24 @@
-/**
- * Created by Dharshini on 5/27/2017.
- */
-(function (){
+(function () {
     angular
         .module('WAM')
-        .controller('websiteListController',websiteListController);
+        .controller('websiteListController', websiteListController);
 
     function websiteListController($routeParams,
                                    websiteService) {
-    var model = this;
-    model.userId = $routeParams['userId'];
+        var model = this;
 
-    function init() {
-        model.websites =
-            websiteService.findAllWebsitesForUser(model.userId);
-    }
-    init();
+        model.userId = $routeParams['userId'];
 
+        function init() {
+            // model.websites = websiteService.findAllWebsitesForUser(model.userId);
+            websiteService
+                .findAllWebsitesForUser(model.userId)
+                .then(renderWebsites);
+        }
+        init();
+
+        function renderWebsites(websites) {
+            model.websites = websites;
+        }
     }
 })();

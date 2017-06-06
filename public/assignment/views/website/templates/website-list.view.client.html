@@ -10,15 +10,18 @@
                 Websites
             </a>
             <p class="navbar-text pull-right">
-                <a href="#!/user/{{model.userId}}/website/new" class="navbar-link">
-                    <span class="glyphicon glyphicon-plus"></span>
+                <a href="#!/user/{{model.userId}}/website/new"
+                   class="btn btn-success btn-block">
+                    New Website
                 </a>
             </p>
         </div>
     </div>
 </nav>
 
+
 <div class="container-fluid top-space">
+    <div ng-show="model.error" class="alert alert-info">{{model.error}}</div>
     <ul class="list-group">
 
         <li class="list-group-item active">
