@@ -14,6 +14,22 @@
         this.findWidgetById = findWidgetById;
         this.deleteWidget = deleteWidget;
         this.updateWidget = updateWidget;
+        this.updateFlickrWidget = updateFlickrWidget;
+        
+        function updateFlickrWidget(websiteId, pageId, widgetId, url) {
+            var newWidget = {
+                _id: widgetId,
+                widgetType: "IMAGE",
+                pageId: pageId,
+                width: "100%",
+                url: url
+            };
+            var url = "/api/page/"+newWidget.pageId+"/widget/";
+            return $http.post(url, newWidget)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function updateWidget(widgetId, widget) {
             var url = "/api/widget/"+widgetId;

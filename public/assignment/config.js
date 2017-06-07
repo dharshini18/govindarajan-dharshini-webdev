@@ -70,6 +70,11 @@
                 templateUrl: 'views/widget/templates/widget-list.view.client.html',
                 controller: 'widgetListController',
                 controllerAs: 'model'
+            })
+            .when('/user/:userId/website/:websiteId/page/:pageId/widget/:widgetId/flickr',{
+                templateUrl: 'views/widget/templates/edit/widget-flickr-search.view.client.html',
+                controller: 'FlickrImageSearchController',
+                controllerAs: 'model'
             });
     }
 
