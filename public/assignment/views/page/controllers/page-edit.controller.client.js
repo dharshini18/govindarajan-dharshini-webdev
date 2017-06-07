@@ -16,20 +16,38 @@
     model.updatePage = updatePage;
 
     function init() {
-        model.pages =
-            pageService.findPageByWebsiteId(model.websiteId);
-        model.page = pageService.findPageByPageId(model.pageId);
+            pageService.findAllPagesForWebsite(model.websiteId)
+                .then(renderPages);
+            pageService.findPageById(model.pageId)
+                .then(renderPage);
     }
     init();
 
-    function deletePage(pageId) {
-        pageService.deletePage(pageId);
-        $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
+    function renderPage(pages) {
+        model.page = page;
     }
 
-    function updatePage() {
-        pageService.updatePage(model.pageId,model.page);
-        $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
+    function renderPages(pages) {
+        model.pages = pages;
+    }
+    function deletePage(pageId) {
+        return pageService
+            .deletePage(pageId)
+            .then(function () {
+                $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
+            },function () {
+                model.error = "Page could not be deleted";
+            });
+    }
+
+    function updatePage(page) {
+        return pageService
+            .updatePage(page._id, page)
+            .then(function () {
+                $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
+            }, function () {
+                model.error = "Page could not be updated";
+            });
     }
     }
 })();
