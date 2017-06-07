@@ -13,25 +13,51 @@
         model.websiteId = $routeParams['websiteId'];
         model.pageId = $routeParams['pageId'];
         model.widgetId = $routeParams['widgetId'];
+        model.deleteWidget = deleteWidget;
+        model.updateWidget = updateWidget;
 
         function init() {
-            model.widgets =
-                widgetService.findWidgetsByPageId(model.pageId);
-            model.widget = widgetService.findWidgetByWidgetId(model.widgetId);
+                widgetService
+                    .findAllWidgetsForPage(model.pageId)
+                    .then(renderWidgets);
+                widgetService
+                    .findWidgetById(model.widgetId)
+                    .then(renderWidget);
+                widgetService
+                    .findWidgetType(model.widgetId)
+                    .then(renderType);
         }
         init();
 
-        function widgetEditUrl(widget) {
-            var widgetType = widget.widgetType;
-            if(widgetType === "HEADING"){
+        function renderType(type) {
+            model.type = type;
+        }
+        function renderWidget(widget) {
+            model.widget = widget;
+        }
 
-            }
-            if(widgetType === "IMAGE"){
-
-            }
-            if(widgetType === "YOUTUBE"){
-
-            }
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
+        
+        function updateWidget(widget) {
+            return widgetService
+                .updateWidget(model.widgetId, widget)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+                },function () {
+                    model.error = "Sorry, the widget could not be updated";
+                })
+        }
+        
+        function deleteWidget(widgetId) {
+            return widgetService
+                .deleteWidget(widgetId)
+                .then(function () {
+                    $location.url('/user/'+model.userId+'/website/'+model.websiteId+'/page/'+model.pageId+'/widget');
+                },function () {
+                    model.error = "Sorry, the widget could not be deleted";
+                })
         }
     }
 })();

@@ -17,12 +17,18 @@
         model.trust = trust;
 
         function init() {
-            model.widgets =
-                widgetService.findWidgetsByPageId(model.pageId);
+                widgetService
+                    .findAllWidgetsForPage(model.pageId)
+                    .then(renderWidgets);
         }
         init();
+
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
         
         function widgetUrl(widget) {
+            var url = 'views/widget/templates/type/widget-'+widget.widgetType+'.view.client.html';
             var url = 'views/widget/templates/type/widget-'+widget.widgetType+'.view.client.html';
             return url;
         }

@@ -15,16 +15,25 @@
         model.createWidget = createWidget;
 
         function init() {
-            model.widgets =
-                widgetService.findWidgetsByPageId(model.pageId);
+                widgetService
+                    .findAllWidgetsForPage(model.pageId)
+                    .then(renderWidgets);
         }
         init();
 
+        function renderWidgets(widgets) {
+            model.widgets = widgets;
+        }
+
         function createWidget(widget,type) {
             widget.widgetType = type;
-            widget.pageId = model.pageId;
-            widgetService.createWidget(widget);
-            $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page/' +model.pageId+ '/widget');
+            return widgetService
+                .createWidget(model.pageId, widget)
+                .then(function () {
+                    $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page/' +model.pageId+ '/widget');
+                },function () {
+                    model.error = "The widget could not be created";
+                });
         }
     }
 })();
