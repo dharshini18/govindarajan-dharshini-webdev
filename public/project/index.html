@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="full" lang="en" ng-app="PRJ">
 <head>
-    <meta charset="UTF-8">
-    <title>Project Index Page</title>
+    <!--Meta Tags-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Grayscale - Start Bootstrap Theme</title>
+
+    <!--Script Tags-->
+    <script src="../assignment/vendor/angular/angular.min.js"></script>
+    <script src="../assignment/vendor/angular/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!--User Scripts-->
+    <script src="views/user/controllers/login.controller.view.js"></script>
+    <script src="views/user/controllers/register.controller.view.js"></script>
+    <script src="views/user/controllers/profile.controller.view.js"></script>
+    <script src="services/user.service.client.js"></script>
+
+    <!--Style Tags-->
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/full.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Project Home Page</h1>
+<!--Allows to inject content dynamically-->
+<div ng-view=""></div>
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
