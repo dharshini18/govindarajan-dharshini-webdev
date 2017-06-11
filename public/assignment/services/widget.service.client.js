@@ -57,6 +57,7 @@
         
         function findAllWidgetsForPage(pageId){
             var url = "/api/page/"+pageId+"/widget";
+            console.log(pageId);
             return $http.get(url)
                 .then(function (response) {
                     return response.data;

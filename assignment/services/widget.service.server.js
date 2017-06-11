@@ -1,16 +1,5 @@
 var app = require('../../express');
-
-var widgets = [
-    { "_id": "123", "widgetType": "HEADING", "pageId": "321", "size": 2, "text": "GIZMODO"},
-    { "_id": "234", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-    { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-        "url": "http://lorempixel.com/400/200/"},
-    { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": '<p>Today we got <a href="http://io9.gizmodo.com/the-new-game-of-thrones-trailer-is-here-and-everyone-i-1795509917" target="_blank" rel="noopener">our first good look</a> at <em>Game of Thrones</em>’ seventh season, and boy howdy does it look like we’re in for some dark times ahead. But while the trailer is suitably cryptic, if you’ve been paying close attention to <a href="http://io9.gizmodo.com/everything-we-know-about-game-of-thrones-seventh-season-1788588295" target="_blank" rel="noopener">the rumors</a> surrounding this penultimate season, it paints an intriguing picture of the battles…<span class="read-more-placeholder"></span></p>'},
-    { "_id": "567", "widgetType": "HEADING", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-    { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-        "url": "https://youtu.be/AM2Ivdi9c4E" },
-    { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-];
+var widgetModel = require('../models/widget/widget.model.server');
 
 app.get('/api/page/:pageId/widget',findAllWidgetsForPage);
 app.post('/api/page/:pageId/widget',createWidget);
@@ -19,107 +8,98 @@ app.get("/api/widget/type/:widgetId",findWidgetType);
 app.put ('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId',deleteWidget);
 
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
 
-    var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
+app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
-    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+function uploadImage(req, res) {
+    var widgetId      = req.body.widgetId;
+    var width         = req.body.width;
+    var myFile        = req.file;
 
-    function uploadImage(req, res) {
+    var userId = req.body.userId;
+    var websiteId = req.body.websiteId;
+    var pageId = req.body.pageId;
 
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
 
-        var userId = req.body.userId;
-        var websiteId = req.body.websiteId;
-        var pageId = req.body.pageId;
+    widget = getWidgetById(widgetId);
+    widget.url = '/assignment/uploads/'+filename;
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
-
-        widget = getWidgetById(widgetId);
-        widget.url = '/assignment/uploads/'+filename;
-
-        var callbackUrl   = "/assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
-        res.redirect(callbackUrl);
-    }
-
-    function getWidgetById(widgetId) {
-        for(var w in widgets){
-            if(widgets[w]._id === widgetId){
-             return widgets[w];
-            }
-        }
-    }
+    var callbackUrl   = "/assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
+    res.redirect(callbackUrl);
+}
+function getWidgetById(widgetId) {
+    return widgetModel.findWidgetById(widgetId)
+        .then(function (widget) {
+            return widget;
+        });
+}
 
 function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
-    for(var w in widgets) {
-        if(widgets[w]._id === widgetId) {
-            widgets.splice(w, 1);
-            res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    return widgetModel.deleteWidget(widgetId)
+        .then(function (status) {
+            res.send(status)
+        },function (err) {
+            res.send(err)
+        });
 }
 
 function updateWidget(req, res) {
     var widget = req.body;
     var widgetId = req.params['widgetId'];
-    for(var w in widgets) {
-        if(widgets[w]._id === widgetId) {
-            widgets[w] = widget;
-            res.sendStatus(200);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    return widgetModel.updateWidget(widgetId, widget)
+        .then(function (status) {
+            res.send(status)
+        },function (err) {
+            res.send(err)
+        })
 }
 
 function findWidgetType(req, res) {
     var widgetId = req.params['widgetId'];
-    for(var w in widgets) {
-        if(widgets[w]._id === widgetId) {
-            res.send(widgets[w].widgetType);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    return widgetModel.findWidgetById(widgetId)
+        .then(function (widget) {
+            res.json(widget.type)
+        },function (err) {
+            res.send(err)
+        })
 }
 
 function findWidgetById(req, res) {
     var widgetId = req.params['widgetId'];
-    for(var w in widgets) {
-        if(widgets[w]._id === widgetId) {
-            res.send(widgets[w]);
-            return;
-        }
-    }
-    res.sendStatus(404);
+    return widgetModel.findWidgetById(widgetId)
+        .then(function (widget) {
+            res.json(widget)
+        },function (err) {
+            res.send(err)
+        });
 }
 
 function createWidget(req, res) {
     var pageId = req.params['pageId'];
     var widget = req.body;
-    widget.pageId = pageId;
-    widget._id = (new Date()).getTime() + "";
-    widgets.push(widget);
-    res.json(widget);
+    return widgetModel.createWidget(pageId, widget)
+        .then(function (widget) {
+            res.json(widget)
+        },function (err) {
+            res.send(err)
+        });
 }
 
 function findAllWidgetsForPage(req, res) {
-    var results = [];
     var pageId = req.params['pageId'];
-    for(var w in widgets){
-        if(widgets[w].pageId === pageId){
-            results.push(widgets[w]);
-        }
-    }
-    res.json(results);
+    return widgetModel.findAllWidgetsForPage(pageId)
+        .then(function (widgets) {
+            res.json(widgets)
+        },function (err) {
+            res.send(err)
+        });
 }

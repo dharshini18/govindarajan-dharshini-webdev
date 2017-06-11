@@ -10,6 +10,8 @@ widgetModel.updateWidget = updateWidget;
 widgetModel.deleteWidget = deleteWidget;
 widgetModel.reorderWidget = reorderWidget;
 
+module.exports = widgetModel;
+
 function createWidget(pageId, widget) {
     widget._page = pageId;
     return widgetModel.create(widget)
@@ -35,10 +37,10 @@ function updateWidget(widgetId, widget) {
 
 function deleteWidget(widgetId) {
     return widgetModel
-        .remove({_id: websiteId})
+        .remove({_id: widgetId})
         .then(function (status) {
-            return userModel
-                .deleteWebsite(userId, websiteId);
+            return pageModel
+                .deleteWebsite(pageId, widgetId);
         });
 }
 
