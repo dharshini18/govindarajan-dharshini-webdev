@@ -23,13 +23,14 @@
     }
     init();
 
-    function renderPage(pages) {
+    function renderPage(page) {
         model.page = page;
     }
 
     function renderPages(pages) {
         model.pages = pages;
     }
+
     function deletePage(pageId) {
         return pageService
             .deletePage(pageId)

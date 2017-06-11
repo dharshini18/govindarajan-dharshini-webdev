@@ -19098,7 +19098,7 @@ define(function (require, exports, module) {
    *
    *  {
    *    version : 3,
-   *    file: "app.js",
+   *    file: "sortable.js",
    *    sections: [{
    *      offset: {line:100, column:10},
    *      map: {

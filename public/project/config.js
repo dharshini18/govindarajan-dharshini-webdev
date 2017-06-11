@@ -25,6 +25,11 @@
                 templateUrl: 'views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
+            })
+            .when('/user/:userId/search',{
+                templateUrl: 'views/user/templates/search-user.view.client.html',
+                controller: 'searchUserController',
+                controllerAs: 'model'
             });
     }
 })();

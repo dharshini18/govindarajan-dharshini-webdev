@@ -13,7 +13,7 @@
                 .findUserByCredentials(username, password)
                 .then(function (found) {
                     if(found !== null) {
-                        $location.url('/user/' + found._id);
+                        $location.url('/user/'+found._id+'/search');
                     } else {
                         model.message = "Sorry, " + username + " not found. please try again!";
                     }

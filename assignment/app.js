@@ -1,6 +1,7 @@
-/**
- * Created by Dharshini on 6/5/2017.
- */
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/webdev-summer1-2017');
+mongoose.Promise = require('q').Promise;
+
 console.log('server side app');
 require('./services/user.service.server');
 require('./services/website.service.server');
