@@ -25,7 +25,9 @@
             model.widgets = widgets;
         }
 
-        function createWidget(widget,type) {
+        function createWidget(widget, type) {
+            console.log(type);
+            console.log(widget);
             widget.type = type;
             return widgetService
                 .createWidget(model.pageId, widget)

@@ -28,7 +28,6 @@
         }
 
         function getYouTubeEmbedUrl(linkUrl) {
-            console.log("Inside Embed Url");
             var embedUrl = "https://www.youtube.com/embed/";
             var linkUrlParts = linkUrl.split('/');
             embedUrl += linkUrlParts[linkUrlParts.length - 1];

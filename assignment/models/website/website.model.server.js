@@ -37,7 +37,7 @@ function createWebsiteForUser(userId, website) {
     return websiteModel.create(website)
         .then(function (website) {
             return userModel
-                .addWebsite(userId, website._id)
+                .addWebsite(userId, website)
         });
 }
 
@@ -52,7 +52,8 @@ function findWebsiteById(websiteId) {
 }
 
 function updateWebsite(websiteId, website) {
-    return websiteModel.update({_id: websiteId}, {$set: website});
+    return websiteModel
+        .update({_id: websiteId}, {$set: website});
 }
 
 function deleteWebsite(websiteId) {

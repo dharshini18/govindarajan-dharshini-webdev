@@ -24,11 +24,12 @@ function deleteWebsite(userId, websiteId) {
         });
 }
 
-function addWebsite(userId, websiteId) {
+function addWebsite(userId, website) {
+    console.log(userId);
     return userModel
         .findById(userId)
         .then(function (user) {
-            user.websites.push(websiteId);
+            user.websites.push(website);
             return user.save();
         });
 }
