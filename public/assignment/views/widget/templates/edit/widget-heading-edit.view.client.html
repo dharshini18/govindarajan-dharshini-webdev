@@ -19,7 +19,7 @@
     <label for="name">Name</label>
     <input class="form-control"
            placeholder="facebook"
-           ng-model = "model.widget.widgetType"
+           ng-model = "model.widget.type"
            id="name"/>
 
     <label for="text">Text</label>
@@ -30,12 +30,12 @@
 
     <label for="size">Size</label>
     <select id="size" class="form-control" ng-model="model.widget.size">
-        <option>1 (X-Large)</option>
-        <option>2 (Larger)</option>
-        <option>3 (Large)</option>
-        <option>4 (Medium)</option>
-        <option>5 (Small)</option>
-        <option>6 (Smallest)</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
     </select>
 
     <a ng-click="model.deleteWidget(model.widgetId)" class="btn btn-block btn-danger">Delete</a>
@@ -47,7 +47,7 @@
     <div class="container">
         <div class="row navbar-text">
             <p class="navbar-text pull-right">
-                <a href="../../../user/templates/profile.view.client.html" class="navbar-link">
+                <a href="#!/user/{{model.userId}}" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>
             </p>

@@ -37,12 +37,14 @@ function updateWidget(widgetId, widget) {
 
 function deleteWidget(widgetId) {
     return widgetModel
-        .findById
-    return widgetModel
-        .remove({_id: widgetId})
-        .then(function (status) {
-            return pageModel
-                .deleteWebsite(pageId, widgetId);
+        .findById(widgetId)
+        .then(function (widget) {
+            return widgetModel
+                .remove({_id: widgetId})
+                .then(function (status) {
+                    return pageModel
+                        .deleteWidget(widget._page, widgetId)
+                });
         });
 }
 

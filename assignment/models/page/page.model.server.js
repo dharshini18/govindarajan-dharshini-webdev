@@ -56,9 +56,14 @@ function updatePage(pageId, page) {
 }
 
 function deletePage(pageId) {
-    return pageModel.remove({_id: pageId})
-        .then(function (status) {
-            return websiteModel
-                .deletePage(websiteId, pageId)
+    return pageModel
+        .findById(pageId)
+        .then(function (page) {
+            return pageModel
+                .remove({_id: pageId})
+                .then(function (status) {
+                    return websiteModel
+                        .deletePage(page._website, pageId)
+                });
         });
 }

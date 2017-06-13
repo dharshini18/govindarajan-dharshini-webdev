@@ -35,6 +35,7 @@ function uploadImage(req, res) {
     var callbackUrl   = "/assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
     res.redirect(callbackUrl);
 }
+
 function getWidgetById(widgetId) {
     return widgetModel.findWidgetById(widgetId)
         .then(function (widget) {
@@ -44,7 +45,8 @@ function getWidgetById(widgetId) {
 
 function deleteWidget(req, res) {
     var widgetId = req.params['widgetId'];
-    return widgetModel.deleteWidget(widgetId)
+    return widgetModel
+        .deleteWidget(widgetId)
         .then(function (status) {
             res.send(status)
         },function (err) {
@@ -55,7 +57,8 @@ function deleteWidget(req, res) {
 function updateWidget(req, res) {
     var widget = req.body;
     var widgetId = req.params['widgetId'];
-    return widgetModel.updateWidget(widgetId, widget)
+    return widgetModel
+        .updateWidget(widgetId, widget)
         .then(function (status) {
             res.send(status)
         },function (err) {
