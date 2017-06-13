@@ -23,9 +23,8 @@
 
             userService
                 .findUserByUsername(username)
-                .then(
-                    function () {
-                        model.error = "Sorry, that username is taken";
+                .then(function () {
+                        model.error = "sorry, that username is taken";
                     },
                     function () {
                         var newUser = {
@@ -39,6 +38,6 @@
                 .then(function (user) {
                     $location.url('/user/' + user._id);
                 });
-        }
+       }
     }
 })();

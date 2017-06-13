@@ -31,6 +31,7 @@
         }
 
         function createUser(user) {
+            console.log("Inside create");
             var url = "/api/user";
             return $http.post(url, user)
                 .then(function (response) {
@@ -39,6 +40,7 @@
         }
 
         function findUserByUsername(username) {
+            console.log(username);
             var url = "/api/user?username="+username;
             return $http.get(url)
                 .then(function (response) {
