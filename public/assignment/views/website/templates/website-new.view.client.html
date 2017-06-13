@@ -43,7 +43,7 @@
                             </a>
                         </div>
                         <div class="col-lg-3 visible-lg">
-                            {{website.created | date}}
+                            {{website.dateCreated | date}}
                         </div>
                         <div class="col-md-3 hidden-sm hidden-xs">
                             {{website.accessed | date}}
@@ -60,13 +60,14 @@
         <div class="col-xs-12 col-sm-8">
             <label for="name">Name</label>
             <input class="form-control"
-                   placeholder="facebook"
+                   placeholder="Facebook"
                    ng-model = "website.name"
                    id="name"/>
 
             <label for="description">Description</label>
             <textarea id="description"
                       rows="5"
+                      placeholder="Social Networking Application"
                       ng-model = "website.description"
                       class="form-control">Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum </textarea>
 

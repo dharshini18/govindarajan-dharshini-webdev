@@ -26,6 +26,7 @@
         }
 
         function createWidget(widget, type) {
+            console.log("Inside create");
             console.log(type);
             console.log(widget);
             widget.type = type;

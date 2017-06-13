@@ -23,16 +23,17 @@
     <label for="text">Text</label>
     <input class="form-control"
            placeholder="facebook"
+           ng-model="widget.text"
            id="text"/>
 
     <label for="size">Size</label>
-    <select id="size" class="form-control" ng-model = "widget.size">
-        <option>1 (X-Large)</option>
-        <option>2 (Larger)</option>
-        <option>3 (Large)</option>
-        <option>4 (Medium)</option>
-        <option>5 (Small)</option>
-        <option>6 (Smallest)</option>
+    <select id="size" class="form-control" ng-model="widget.size">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
     </select>
 
     <a ng-click="model.createWidget(widget,'HEADING')" class="btn btn-block btn-success">Create</a>

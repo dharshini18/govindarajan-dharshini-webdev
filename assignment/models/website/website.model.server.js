@@ -57,10 +57,13 @@ function updateWebsite(websiteId, website) {
 }
 
 function deleteWebsite(websiteId) {
-    return websiteModel
-        .remove({_id: websiteId})
-        .then(function (status) {
-            return userModel
-                .deleteWebsite(userId, websiteId);
+    return websiteModel.findById(websiteId)
+        .then(function (website) {
+            return websiteModel
+                .remove({_id: websiteId})
+                .then(function (status) {
+                    return userModel
+                        .deleteWebsite(website._user, websiteId)
+                });
         });
 }

@@ -37,6 +37,8 @@ function updateWidget(widgetId, widget) {
 
 function deleteWidget(widgetId) {
     return widgetModel
+        .findById
+    return widgetModel
         .remove({_id: widgetId})
         .then(function (status) {
             return pageModel
