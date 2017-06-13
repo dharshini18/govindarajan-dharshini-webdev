@@ -1,9 +1,9 @@
 var app = require('./express');
 var bodyParser = require('body-parser');
 
-/*var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/webdev-summer1-2017');
-mongoose.Promise = require('q').Promise;*/
+mongoose.Promise = require('q').Promise;
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
