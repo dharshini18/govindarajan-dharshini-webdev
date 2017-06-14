@@ -60,6 +60,9 @@ function findAllUsers(req, res) {
                 } else {
                     res.sendStatus(404);
                 }
+            }, function(error){
+                console.log(error);
+                res.sendStatus(404);
             });
     } else if (username) {
         userModel
