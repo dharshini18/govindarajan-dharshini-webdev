@@ -7,9 +7,9 @@
         .controller('websiteEditController',websiteEditController);
 
     function websiteEditController($location, $routeParams,
-                                   websiteService) {
+                                   websiteService, currentUser) {
     var model = this;
-    model.userId = $routeParams['userId'];
+    model.userId = currentUser._id;
     model.websiteId = $routeParams['websiteId'];
     model.deleteWebsite = deleteWebsite;
     model.updateWebsite = updateWebsite;
@@ -36,7 +36,7 @@
         return websiteService
             .updateWebsite(website._id, website)
             .then(function () {
-                $location.url('/user/' +model.userId+ '/website');
+                $location.url('/website');
             },function () {
                 model.error = "Website Could not be updated";
             });
@@ -46,7 +46,7 @@
         return websiteService
             .deleteWebsite(websiteId)
             .then(function () {
-                $location.url('/user/' +model.userId+ '/website');
+                $location.url('/website');
             },function () {
                 model.error = "Unable to delete website";
             })

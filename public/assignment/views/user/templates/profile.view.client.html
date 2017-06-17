@@ -45,10 +45,10 @@
                    placeholder="Wonderland">
         </div>
     </form>
-    <a class="btn btn-primary btn-block" href="#!/user/{{model.userId}}/website">Websites</a>
+    <a class="btn btn-primary btn-block" href="#!/website">Websites</a>
     <a class="btn btn-success btn-block" ng-click="model.updateUser(model.user)">Update</a>
     <a class="btn btn-default btn-block" ng-click="model.deleteUser(model.user)">UnRegister</a>
-    <a class="btn btn-danger  btn-block" href="#!/login">Logout</a>
+    <a class="btn btn-danger  btn-block" ng-click="model.logout()">Logout</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

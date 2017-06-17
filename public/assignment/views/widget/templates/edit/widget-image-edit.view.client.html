@@ -1,25 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <a href="../widget-list.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-            </p>
-
-            <a class="navbar-brand" href="#">
-                Image Editor
-            </a>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-
+<div class="container-fluid top-space">
     <label for="name">Name</label>
     <input class="form-control"
            placeholder="facebook"
-           ng-model="model.widget.widgetType"
+           ng-model="model.widget.name"
            id="name"/>
 
     <label for="url">Url</label>
@@ -28,14 +11,16 @@
            ng-model="model.widget.url"
            id="url"/>
 
-    <form action="/api/upload"   method="post" enctype="multipart/form-data">
-        <input  name="myFile"    type="file" class="form-control"/>
-        <input  name="width"     value="{{model.widget.width}}" style="display: none"/>
-        <input  name="userId"    value="{{model.userId}}"   style="display: none"/>
-        <input  name="websiteId" value="{{model.websiteId}}"   style="display: none"/>
-        <input  name="pageId"    value="{{model.pageId}}"   style="display: none"/>
-        <input  name="widgetId"  value="{{model.widget._id}}"   style="display: none"/>
-        <button type="submit"    class="btn btn-block   ` btn-primary">Upload Image</button>
+    <form action="/api/upload"    method="post" enctype="multipart/form-data">
+        <input  name="myFile"     type="file" class="form-control"/>
+        <input  name="width"      value="{{model.widget.width}}" style="display: none"/>
+        <input  name="userId"     value="{{model.userId}}"   style="display: none"/>
+        <input  name="websiteId"  value="{{model.websiteId}}"   style="display: none"/>
+        <input  name="pageId"     value="{{model.pageId}}"   style="display: none"/>
+        <input  name="widgetId"   value="{{model.widget._id}}"   style="display: none"/>
+        <input  name="callFrom"   value="edit"   style="display: none"/>
+        <input  name="widgetType" value="IMAGE"   style="display: none"/>
+        <button type="submit"     class="btn btn-block btn-primary">Upload Image</button>
     </form>
 
     <a ng-click="model.deleteWidget(model.widgetId)"
@@ -45,15 +30,3 @@
     <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{model.widgetId}}/flickr"
        class="btn btn-block btn-default">Search Flickr</a>
 </div>
-
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div class="container">
-        <div class="row navbar-text">
-            <p class="navbar-text pull-right">
-                <a href="../../../user/templates/profile.view.client.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
-            </p>
-        </div>
-    </div>
-</nav>

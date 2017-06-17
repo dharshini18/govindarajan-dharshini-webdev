@@ -9,18 +9,24 @@ app.put ('/api/widget/:widgetId', updateWidget);
 app.delete('/api/widget/:widgetId',deleteWidget);
 
 var multer = require('multer'); // npm install multer --save
-var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
+var upload = multer({ dest: __dirname+'/../../public/assignment/upload' });
 
 app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 function uploadImage(req, res) {
-    var widgetId      = req.body.widgetId;
+    var widget = {};
     var width         = req.body.width;
     var myFile        = req.file;
 
     var userId = req.body.userId;
     var websiteId = req.body.websiteId;
     var pageId = req.body.pageId;
+    var callFrom = req.body.callFrom;
+
+    widget.name = req.body.name;
+    widget.text = req.body.text;
+    widget.width = width;
+    widget.type = req.body.widgetType;
 
     var originalname  = myFile.originalname; // file name on user's computer
     var filename      = myFile.filename;     // new file name in upload folder
@@ -29,11 +35,26 @@ function uploadImage(req, res) {
     var size          = myFile.size;
     var mimetype      = myFile.mimetype;
 
-    widget = getWidgetById(widgetId);
-    widget.url = '/assignment/uploads/'+filename;
+    widget.url = '/assignment/upload/' + filename;
 
-    var callbackUrl   = "/assignment/index.html#!/user/"+userId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId;
-    res.redirect(callbackUrl);
+    if(callFrom === "new"){
+        widgetModel
+            .createWidget(pageId, widget)
+            .then(function () {
+                var callbackUrl = "/assignment/index.html#!/website/" +websiteId+ "/page/" +pageId+ "/widget";
+                res.redirect(callbackUrl);
+            });
+    }
+
+    if(callFrom === "edit"){
+        widgetId = req.body.widgetId;
+        widgetModel
+            .updateWidget(widgetId, widget)
+            .then(function () {
+                var callbackUrl = "/assignment/index.html#!/website/" +websiteId+ "/page/" +pageId+ "/widget";
+                res.redirect(callbackUrl);
+            })
+    }
 }
 
 function getWidgetById(widgetId) {
@@ -87,6 +108,7 @@ function findWidgetById(req, res) {
 }
 
 function createWidget(req, res) {
+    console.log("Into Create");
     var pageId = req.params['pageId'];
     var widget = req.body;
     return widgetModel.createWidget(pageId, widget)

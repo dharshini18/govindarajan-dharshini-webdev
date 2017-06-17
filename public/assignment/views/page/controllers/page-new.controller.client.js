@@ -7,9 +7,9 @@
         .controller('pageNewController',pageNewController);
 
     function pageNewController($location, $routeParams,
-                                   pageService) {
+                                   pageService,currentUser) {
     var model = this;
-    model.userId = $routeParams['userId'];
+    model.userId = currentUser._id;
     model.websiteId = $routeParams['websiteId'];
     model.createPage = createPage;
 
@@ -28,10 +28,10 @@
         return pageService
             .createPage(model.websiteId,page)
             .then(function () {
-                $location.url('/user/' +model.userId+ '/website/' +model.websiteId+ '/page');
+                $location.url('/website/' +model.websiteId+ '/page');
             },function () {
                 model.error = "Sorry, New page could not be created";
             });
-    }
+        }
     }
 })();

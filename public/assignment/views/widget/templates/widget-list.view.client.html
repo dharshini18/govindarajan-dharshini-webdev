@@ -2,8 +2,9 @@
 
 <div class="container-fluid top-space">
     <div ng-repeat="widget in model.widgets" class="wd-widget">
+        {{widget.type}}
         <div class="wd-widget-toolbar">
-            <a href="#!/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+            <a href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
         </div>

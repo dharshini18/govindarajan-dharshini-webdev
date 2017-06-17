@@ -7,9 +7,9 @@
         .controller('websiteNewController',websiteNewController);
 
     function websiteNewController($location, $routeParams,
-                                   websiteService) {
+                                   websiteService, currentUser) {
     var model = this;
-    model.userId = $routeParams['userId'];
+    model.userId = currentUser._id;
     model.createWebsite = createWebsite;
 
     function init() {
@@ -27,7 +27,7 @@
         return websiteService
             .createWebsite(model.userId, website)
             .then(function (website) {
-                $location.url('/user/' +model.userId+ '/website');
+                $location.url('/website');
             },function () {
                 model.error = "Website Could not be created";
             })

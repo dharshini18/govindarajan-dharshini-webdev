@@ -7,9 +7,9 @@
         .controller('pageListController',pageListController);
 
     function pageListController($routeParams,
-                                pageService) {
+                                pageService, currentUser) {
     var model = this;
-    model.userId = $routeParams['userId'];
+    model.userId = currentUser._id;
     model.websiteId = $routeParams['websiteId'];
 
     function init() {

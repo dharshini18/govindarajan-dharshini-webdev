@@ -6,7 +6,6 @@
     function registerController($location, userService) {
 
         var model = this;
-
         model.register = register;
 
         function register(username, password, password2) {
@@ -23,8 +22,9 @@
 
             userService
                 .findUserByUsername(username)
-                .then(function () {
-                        model.error = "sorry, that username is taken";
+                .then(
+                    function () {
+                        model.error = "Sorry, that username is taken";
                     },
                     function () {
                         var newUser = {
@@ -32,12 +32,12 @@
                             password: password
                         };
                         return userService
-                            .createUser(newUser);
+                            .register(newUser);
                     }
                 )
                 .then(function (user) {
-                    $location.url('/user/' + user._id);
+                    $location.url('/profile');
                 });
-       }
+        }
     }
 })();

@@ -1,3 +1,18 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#!/website/{{model.websiteId}}/page/{{model.pageId}}/widget" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                {{model.type}} Editor
+            </a>
+        </div>
+    </div>
+</nav>
+
 <div class="container-fluid top-space">
     <div ng-switch="model.type" class="wd-widget">
         <div ng-switch-when="IMAGE">
@@ -18,3 +33,14 @@
     </div>
 </div>
 
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="row navbar-text">
+            <p class="navbar-text pull-right">
+                <a href="#!/profile" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

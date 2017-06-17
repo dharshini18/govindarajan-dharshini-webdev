@@ -1,6 +1,3 @@
-// module.exports = function(app)
-// {
-
 var app = require('../express');
 
     app.get("/api/test", findAllMessages);
@@ -17,14 +14,12 @@ var app = require('../express');
             process.env.MLAB_APP_NAME;
     }
 
-
     if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
         var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment
         var password = process.env.MLAB_PASSWORD_WEBDEV;
         connectionString = 'mongodb://'+username+':'+password;
         connectionString += '@ds137291.mlab.com:37291/heroku_tb3gbt95'; // user yours
     }
-
 
     var mongoose = require("mongoose");
     mongoose.connect(connectionString);

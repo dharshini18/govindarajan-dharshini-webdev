@@ -10,9 +10,49 @@
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             deleteUser: deleteUser,
-            updateUser: updateUser
+            updateUser: updateUser,
+            login: login,
+            loggedIn: loggedIn,
+            logout: logout,
+            register: register
         };
         return api;
+
+        function register(userObj) {
+            var url = "/api/register";
+            return $http.post(url, userObj)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function logout() {
+            var url = "/api/logout";
+            return $http.post(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function loggedIn() {
+            var url = "/api/loggedIn";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function login(username, password) {
+            var url = "/api/login";
+            var credentials  = {
+                username: username,
+                password: password
+            };
+            return $http.post(url, credentials)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function deleteUser(userId) {
             var url = "/api/user/"+userId;
