@@ -14,8 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use(app.express.static(__dirname + '/public'));
 
 app.use(cookieParser());
-//app.use(session({secret: process.env.SESSION_SECRET}));
-app.use(session({secret: "Some Text"}));
+app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 

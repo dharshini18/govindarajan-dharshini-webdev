@@ -1,10 +1,20 @@
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 var LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
+
+var facebookConfig = {
+    clientID     : process.env.FACEBOOK_CLIENT_ID,
+    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['email']
+};
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 app.get ('/api/user/:userId', findUserById);
 app.get ('/api/user', isAdmin, findAllUsers);
@@ -14,12 +24,52 @@ app.delete ('/api/user/:userId', isAdmin, deleteUser);
 
 //To test passport authentication
 app.post ('/api/login', passport.authenticate('local'), login);
+app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/assignment/index.html#!/profile',
+        failureRedirect: '/#!/login'
+    }));
+
 app.get ('/api/loggedIn', loggedIn);
 app.get ('/api/checkAdmin', checkAdmin);
 app.post ('/api/logout', logout);
 app.post ('/api/register', register);
 app.post ('/api/unregister', unregister);
 app.post ('/api/user/:userId', update);
+
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var newFacebookUser = {
+                        username:  profile.emails[0].value,
+                        email: profile.emails[0].value,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
 
 function unregister (req, res) {
     var user = req.body;

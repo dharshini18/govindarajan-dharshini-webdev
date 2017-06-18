@@ -9,6 +9,10 @@ var userSchema = mongoose.Schema({
     phone: String,
     roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}],
     websites: [{type: mongoose.Schema.ObjectId, ref: "WebsiteModel"}],
+    facebook: {
+        id:    String,
+        token: String
+    },
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "user"});
 
