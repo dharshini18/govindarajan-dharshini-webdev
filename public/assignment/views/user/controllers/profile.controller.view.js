@@ -8,14 +8,22 @@
                                userService) {
         var model = this;
         model.userId = currentUser._id;
-        model.updateUser = updateUser;
+        model.update = update;
         model.deleteUser = deleteUser;
         model.logout = logout;
+        model.unregister = unregister;
 
         function init() {
             renderUser(currentUser);
         }
         init();
+        
+        function unregister() {
+            userService.unregister()
+                .then(function (status) {
+                   $location.url('/');
+                });
+        }
 
         function logout() {
             userService
@@ -35,15 +43,15 @@
                 });
         }
 
-        function updateUser(user) {
+        function update(user) {
             userService
-                .updateUser(user._id, user)
+                .update(user._id, user)
                 .then(function () {
                     model.message = "User update was successful";
                 });
         }
 
-        function renderUser (user) {
+        function renderUser(user) {
             model.user = user;
         }
 

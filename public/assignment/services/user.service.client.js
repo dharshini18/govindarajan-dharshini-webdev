@@ -14,9 +14,29 @@
             login: login,
             loggedIn: loggedIn,
             logout: logout,
-            register: register
+            register: register,
+            checkAdmin: checkAdmin,
+            unregister: unregister,
+            findAllUsers: findAllUsers,
+            update: update
         };
         return api;
+        
+        function unregister() {
+            var url = "/api/unregister";
+            return $http.post(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function findAllUsers() {
+            var url = "/api/user";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function register(userObj) {
             var url = "/api/register";
@@ -36,6 +56,14 @@
 
         function loggedIn() {
             var url = "/api/loggedIn";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function checkAdmin() {
+            var url = "/api/checkAdmin";
             return $http.get(url)
                 .then(function (response) {
                     return response.data;
@@ -65,6 +93,14 @@
         function updateUser(userId, user) {
             var url = "/api/user/"+userId;
             return $http.put(url, user)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function update(userId, user) {
+            var url = "/api/user/"+userId;
+            return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
                 });

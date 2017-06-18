@@ -7,16 +7,37 @@ passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
 app.get ('/api/user/:userId', findUserById);
-app.get ('/api/user', findAllUsers);
-app.post('/api/user', createUser);
-app.put ('/api/user/:userId', updateUser);
-app.delete ('/api/user/:userId', deleteUser);
+app.get ('/api/user', isAdmin, findAllUsers);
+app.post('/api/user', isAdmin, createUser);
+app.put ('/api/user/:userId',isAdmin, updateUser);
+app.delete ('/api/user/:userId', isAdmin, deleteUser);
 
 //To test passport authentication
 app.post ('/api/login', passport.authenticate('local'), login);
 app.get ('/api/loggedIn', loggedIn);
+app.get ('/api/checkAdmin', checkAdmin);
 app.post ('/api/logout', logout);
 app.post ('/api/register', register);
+app.post ('/api/unregister', unregister);
+app.post ('/api/user/:userId', update);
+
+function unregister (req, res) {
+    var user = req.body;
+    userModel
+        .deleteUser(user._id)
+        .then(function (user) {
+            req.logout();
+            res.sendStatus(200);
+        });
+}
+
+function isAdmin(req, res, next) {
+    if(req.isAuthenticated() && req.user.roles.indexOf('ADMIN')>-1){
+        next();
+    } else {
+        res.sendStatus(401);
+    }
+}
 
 function register (req, res) {
     var user = req.body;
@@ -66,9 +87,17 @@ function localStrategy(username, password, done) {
 }
 
 function loggedIn(req, res) {
-    console.log(req.user);
     var user = req.user;
     if (req.isAuthenticated()){
+        res.json(user);
+    } else {
+        res.send('0');
+    }
+}
+
+function checkAdmin(req, res) {
+    var user = req.user;
+    if (req.isAuthenticated() && user.roles.indexOf('ADMIN')>-1){
         res.json(user);
     } else {
         res.send('0');
@@ -95,6 +124,17 @@ function updateUser(req, res) {
     var user = req.body;
     var userId = req.params['userId'];
     userModel.updateUser(userId, user)
+        .then(function (status) {
+            res.send(status);
+        },function (err) {
+            res.send(err);
+        })
+}
+
+function update(req, res) {
+    var user = req.body;
+    var userId = req.params['userId'];
+    userModel.updateProfile(userId, user)
         .then(function (status) {
             res.send(status);
         },function (err) {

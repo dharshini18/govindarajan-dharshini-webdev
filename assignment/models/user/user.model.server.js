@@ -11,6 +11,7 @@ userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
 userModel.addWebsite = addWebsite;
 userModel.deleteWebsite = deleteWebsite;
+userModel.updateProfile = updateProfile;
 
 module.exports = userModel;
 
@@ -35,6 +36,11 @@ function addWebsite(userId, website) {
 }
 
 function createUser(user) {
+    if(user.roles){
+        user.roles = user.roles.split(',');
+    } else {
+        user.roles = ['USER'];
+    }
     return userModel.create(user);
 }
 
@@ -56,6 +62,13 @@ function findUserByCredentials(username, password) {
 
 function updateUser(userId, newUser) {
     delete newUser.username;
+    if(typeof newUser.roles === 'string'){
+        newUser.roles = newUser.roles.split(',');
+    }
+    return userModel.update({_id: userId}, {$set: newUser})
+}
+
+function updateProfile(userId, newUser) {
     return userModel.update({_id: userId}, {$set: newUser})
 }
 

@@ -12,6 +12,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <a ng-show = "!model.currentUser._id" href="#!/login" class="btn btn-success">Sign in</a>
+                <a ng-if="model.currentUser.roles.indexOf('ADMIN')>-1" href="#!/admin" class="btn btn-success">Admin</a>
             </form>
         </div><!--/.navbar-collapse -->
     </div>
