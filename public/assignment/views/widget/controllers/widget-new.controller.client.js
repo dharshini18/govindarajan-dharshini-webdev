@@ -26,6 +26,10 @@
         }
 
         function createWidget(widget, type) {
+            if (typeof widget === 'undefined' || widget === "" || widget === null){
+                model.error = "Widget Name is required for creation";
+                return;
+            }
             widget.type = type;
             return widgetService
                 .createWidget(model.pageId, widget)

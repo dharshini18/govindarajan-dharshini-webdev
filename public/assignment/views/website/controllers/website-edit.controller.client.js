@@ -33,6 +33,11 @@
     }
 
     function updateWebsite(website) {
+
+        if (typeof website.name === 'undefined' || website.name === "" || website.name === null){
+            model.error = "Website Name is required for updation";
+            return;
+        }
         return websiteService
             .updateWebsite(website._id, website)
             .then(function () {

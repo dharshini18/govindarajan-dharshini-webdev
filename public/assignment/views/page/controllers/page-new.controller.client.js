@@ -25,6 +25,10 @@
     }
 
     function createPage(page) {
+        if (typeof page === 'undefined' || page === "" || page === null){
+            model.error = "Page Name is required for creation";
+            return;
+        }
         return pageService
             .createPage(model.websiteId,page)
             .then(function () {

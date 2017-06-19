@@ -13,6 +13,10 @@
     </div>
 </nav>
 
+<div ng-show="model.error"
+     class="alert alert-danger">
+    {{model.error}}
+</div>
 <div class="container-fluid top-space">
     <div ng-switch="model.type" class="wd-widget">
         <div ng-switch-when="IMAGE">
