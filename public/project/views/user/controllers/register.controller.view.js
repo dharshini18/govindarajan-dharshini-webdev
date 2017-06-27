@@ -6,18 +6,18 @@
     function registerController($location, userService) {
 
         var model = this;
-
         model.register = register;
 
-        function register(username, password, password2) {
+        function register
+        (username, type, firstName, lastName, password, password2, email, phone ) {
 
             if(username === null || username === '' || typeof username === 'undefined') {
-                model.error = 'username is required';
+                model.error = 'Username is required';
                 return;
             }
 
             if(password !== password2 || password === null || typeof password === 'undefined') {
-                model.error = "passwords must match";
+                model.error = "Passwords must match";
                 return;
             }
 
@@ -30,14 +30,19 @@
                     function () {
                         var newUser = {
                             username: username,
-                            password: password
+                            password: password,
+                            roles: type,
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            phone: phone
                         };
                         return userService
-                            .createUser(newUser);
+                            .register(newUser);
                     }
                 )
                 .then(function (user) {
-                    $location.url('/user/' + user._id);
+                    $location.url('/profile');
                 });
         }
     }

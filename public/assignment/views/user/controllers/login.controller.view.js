@@ -18,7 +18,6 @@
                 model.error = 'Password is required';
                 return;
             }
-
                 userService
                     .login(username, password)
                     .then(function (found) {

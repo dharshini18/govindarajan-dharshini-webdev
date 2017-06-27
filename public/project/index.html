@@ -1,40 +1,60 @@
 <!DOCTYPE html>
-<html class="full" lang="en" ng-app="PRJ">
+<html lang="en" ng-app="PRJ">
 <head>
-    <!--Meta Tags-->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0,user-scalable=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Grayscale - Start Bootstrap Theme</title>
+    <!--Script tags-->
+    <script src="vendor/angular/angular.min.js"></script>
+    <script src="vendor/angular/angular-route.js"></script>
+    <script src="vendor/jquery/dist/jquery.min.js"></script>
+    <script src="vendor/jqueryui/jquery-ui.js"></script>
 
-    <!--Script Tags-->
-    <script src="../assignment/vendor/angular/angular.min.js"></script>
-    <script src="../assignment/vendor/angular/angular-route.js"></script>
+    <!--text Angular js-->
+    <script src="vendor/js/textAngular-rangy.min.js"></script>
+    <script src="vendor/js/textAngular-sanitize.min.js"></script>
+    <script src="vendor/js/textAngular.min.js"></script>
+
+    <!--Application script tags-->
     <script src="app.js"></script>
     <script src="config.js"></script>
 
-    <!--User Scripts-->
-    <script src="views/user/controllers/login.controller.view.js"></script>
-    <script src="views/user/controllers/register.controller.view.js"></script>
-    <script src="views/user/controllers/profile.controller.view.js"></script>
-    <script src="services/user.service.client.js"></script>
+    <!--Controllers-->
 
-    <!--Style Tags-->
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/full.css" rel="stylesheet">
+    <!--Home controller-->
+    <script src="../project/views/home/controllers/main.controller.client.js"></script>
+
+    <!--User controllers and service-->
+    <script src="../project/views/user/controllers/login.controller.view.js"></script>
+    <script src="../project/views/user/controllers/register.controller.view.js"></script>
+    <script src="../project/views/user/controllers/profile.controller.view.js"></script>
+    <script src="../project/views/admin/controllers/admin.users.controller.client.js"></script>
+    <script src="../project/services/user.service.client.js"></script>
+
+    <!--Recipe Search Controllers and Services-->
+
+    <!--Meta tags and title-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>WebDev Summer1 Project</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="./vendor/css/starter-template.css" rel="stylesheet">
+    <link href="./vendor/font-awesome-4.7.0/fonts/fontawesome-webfont.svg" rel="stylesheet">
 </head>
-<body>
-<!--Allows to inject content dynamically-->
+<body class="backgroundImage">
+<!--Dynamically load content-->
 <div ng-view=""></div>
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

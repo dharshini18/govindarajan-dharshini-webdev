@@ -1,3 +1,4 @@
+/*
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
@@ -16,4 +17,4 @@ var userSchema = mongoose.Schema({
     dateCreated: {type: Date, default: Date.now()}
 }, {collection: "user"});
 
-module.exports = userSchema;
+module.exports = userSchema;*/

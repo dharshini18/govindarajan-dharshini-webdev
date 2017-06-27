@@ -21,5 +21,6 @@ app.use(passport.session());
 require('./assignment/session/app');
 require('./assignment/app');
 require('./test/app');
+require('./project/app');
 
 app.listen(process.env.PORT || 3000);

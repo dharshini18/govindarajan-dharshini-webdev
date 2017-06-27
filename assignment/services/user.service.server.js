@@ -1,3 +1,4 @@
+/*
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 var passport = require('passport');
@@ -245,4 +246,4 @@ function findAllUsers(req, res) {
                 res.json(users);
             });
     }
-}
+}*/

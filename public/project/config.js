@@ -1,6 +1,3 @@
-/**
- * Created by Dharshini on 5/27/2017.
- */
 (function () {
     angular
         .module('PRJ')
@@ -9,27 +6,91 @@
     function configuration($routeProvider) {
         $routeProvider
             .when('/',{
-                templateUrl: 'home.html'
+                templateUrl: '../project/views/home/templates/home.html',
+                controller: 'mainController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkCurrentUser
+                }
             })
             .when('/login',{
-                templateUrl: 'views/user/templates/login.view.client.html',
+                templateUrl: '../project/views/user/templates/login.view.client.html',
                 controller: 'loginController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId',{
-                templateUrl: 'views/user/templates/profile.view.client.html',
+            .when('/admin', {
+                templateUrl: '../project/views/admin/templates/admin.view.client.html',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/admin/user', {
+                templateUrl: '../project/views/admin/templates/admin.users.view.client.html',
+                controller: 'adminUsersController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkAdmin
+                }
+            })
+            .when('/profile',{
+                templateUrl: '../project/views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
             .when('/register',{
-                templateUrl: 'views/user/templates/register.view.client.html',
+                templateUrl: '../project/views/user/templates/register.view.client.html',
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/user/:userId/search',{
-                templateUrl: 'views/user/templates/search-user.view.client.html',
-                controller: 'searchUserController',
-                controllerAs: 'model'
+            .when('/recipeSearch',{
+                templateUrl: '../project/views/recipe/templates/recipeSearch.view.client.html'
             });
+    }
+
+    function checkLoggedIn(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedIn()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkCurrentUser(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .loggedIn()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.resolve({});
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin(userService, $q, $location) {
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then(function (user) {
+                if (user === '0') {
+                    deferred.reject();
+                    $location.url('/');
+                } else {
+                    deferred.resolve(user);
+                }
+            });
+        return deferred.promise;
     }
 })();

@@ -4,19 +4,34 @@
         .controller('profileController', profileController);
 
     function profileController($location,
-                               $routeParams,
+                               currentUser,
                                userService) {
-
         var model = this;
-
-        model.userId = $routeParams['userId'];
-        model.updateUser = updateUser;
+        model.userId = currentUser._id;
+        model.update = update;
         model.deleteUser = deleteUser;
+        model.logout = logout;
+        model.unregister = unregister;
 
-        // model.user = userService.findUserById(model.userId);
-        userService
-            .findUserById(model.userId)
-            .then(renderUser, userError);
+        function init() {
+            renderUser(currentUser);
+        }
+        init();
+        
+        function unregister() {
+            userService.unregister()
+                .then(function (status) {
+                   $location.url('/');
+                });
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
+        }
 
         function deleteUser(user) {
             userService
@@ -28,15 +43,15 @@
                 });
         }
 
-        function updateUser(user) {
+        function update(user) {
             userService
-                .updateUser(user._id, user)
+                .update(user._id, user)
                 .then(function () {
                     model.message = "User update was successful";
-                })
+                });
         }
 
-        function renderUser (user) {
+        function renderUser(user) {
             model.user = user;
         }
 

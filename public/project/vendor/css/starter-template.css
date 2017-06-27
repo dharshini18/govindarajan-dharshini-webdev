@@ -1,0 +1,62 @@
+body {
+    padding-top: 50px;
+}
+.backgroundImage{
+    background: url("../../vendor/images/img6.jpg") no-repeat scroll;
+    height: 100px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+.navbar-nav {
+    float: right;
+    margin: 0;
+}
+.navbar{
+    border-color: white;
+    background-color: transparent;
+}
+.center_div{
+    margin-top: 150px;
+}
+.bloggerdiv{
+    color: white;
+    margin-right: 15px;
+    font-size: medium;
+}
+.signUp{
+    font-size: medium;
+    margin: 2px;
+    overflow: hidden;
+}
+.topicForm{
+    color: white;
+}
+.homeHeading{
+    font-size: medium;
+    color: white;
+    text-align: center;
+    font-family: Georgia;
+    font-style: italic;
+}
+#button1,#button2{
+    background-color: orangered;
+    border-color: orangered;
+    border-radius: 20px;
+    display: inline-block;
+}
+.searchButton{
+    text-align: center;
+}
+#buttonDiv{
+    text-align: center;
+    margin-top: 50px;
+}
+.bt1{
+    display: inline-block;
+    background-color: orangered;
+    border-color: orangered;
+    border-radius: 20px;
+    color: white;
+}
