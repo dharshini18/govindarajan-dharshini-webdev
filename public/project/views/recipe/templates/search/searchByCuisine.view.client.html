@@ -1,0 +1,27 @@
+<div class="container-fluid center_div" id="searchDiv">
+    <div class="form-group" id="dropdown">
+        <select class="form-control" ng-model="cuisine">
+            <option value="Kid-Friendly">Kid-Friendly</option>
+            <option value="Barbecue">Barbecue</option>
+            <option value="Italian">Italian</option>
+            <option value="Chinese">Chinese</option>
+            <option value="American">American</option>
+            <option value="Mexican">Mexican</option>
+            <option value="Southwestern">Southwestern</option>
+            <option value="Indian">Indian</option>
+            <option value="Asian">Asian</option>
+            <option value="Greek">Greek</option>
+            <option value="English">English</option>
+            <option value="French">French</option>
+            <option value="Irish">Irish</option>
+            <option value="Cuban">Cuban</option>
+            <option value="German">German</option>
+            <option value="Southern & Soul Food">Southern & Soul Food</option>
+        </select>
+        <div class="form-group sign-btn">
+            <a ng-click="model.searchByCuisine(cuisine)" class="btn btn-success btn-block">
+                Hit !
+            </a>
+        </div>
+    </div>
+</div>
