@@ -7,14 +7,26 @@
         </div>
     </div>
 </nav>
-<div class="container-fluid center_div" id="buttonDiv">
-    <a ng-click="template='project/views/recipe/templates/search/searchByCourse.view.client.html'"
+<div ng-show="!model.recipes" class="container-fluid center_div" id="buttonDiv">
+    <a ng-click="template='../project/views/recipe/templates/search/searchByCourse.view.client.html'"
        class="btn btn-default bt1">Search By Course</a>
-    <a ng-click="template='project/views/recipe/templates/search/searchByIngredient.view.client.html'"
+    <a ng-click="template='../project/views/recipe/templates/search/searchByIngredient.view.client.html'"
        class="btn btn-default bt1">Search By Ingredients</a>
-    <a ng-click="template='project/views/recipe/templates/search/searchByCuisine.view.client.html'"
+    <a ng-click="template='../project/views/recipe/templates/search/searchByCuisine.view.client.html'"
        class="btn btn-default bt1">Search By Cuisine</a>
 </div>
-<div class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
+<div ng-show="!model.recipes" class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
     <ng-include src="template"></ng-include>
+</div>
+<div ng-show="model.recipes" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
+    <!-- 1st row verticaly centered text in the square columns -->
+    <div ng-repeat="recipe in model.recipes" class="square">
+        <div class="content">
+            <div class="table">
+                <div class="table-cell">
+                    <img ng-src="{{recipe.imageUrlsBySize['90']}}" width="100%">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

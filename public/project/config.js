@@ -46,7 +46,14 @@
                 controllerAs: 'model'
             })
             .when('/recipeSearch',{
-                templateUrl: '../project/views/recipe/templates/recipeSearch.view.client.html'
+                templateUrl: '../project/views/recipe/templates/recipeSearch.view.client.html',
+                controller: 'recipeSearchController',
+                controllerAs: 'model'
+            })
+            .when('/recipeList',{
+                templateUrl: '../project/views/recipe/templates/recipeList.view.client.html',
+                controller: 'recipeSearchController',
+                controllerAs: 'model'
             });
     }
 
