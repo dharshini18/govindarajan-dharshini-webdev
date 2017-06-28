@@ -35,7 +35,7 @@ app.get ('/api/loggedIn', loggedIn);
 app.get ('/api/checkAdmin', checkAdmin);
 app.post ('/api/logout', logout);
 app.post ('/api/register', register);
-app.post ('/api/unregister', unregister);
+app.post ('/api/unregister/:userId', unregister);
 app.post ('/api/user/:userId', update);
 
 function facebookStrategy(token, refreshToken, profile, done) {
@@ -72,9 +72,9 @@ function facebookStrategy(token, refreshToken, profile, done) {
 }
 
 function unregister (req, res) {
-    var user = req.body;
+    var userId = req.params.userId;
     userModel
-        .deleteUser(user._id)
+        .deleteUser(userId)
         .then(function (user) {
             req.logout();
             res.sendStatus(200);

@@ -18,8 +18,9 @@
         }
         init();
         
-        function unregister() {
-            userService.unregister()
+        function unregister(user) {
+            userService
+                .unregister(user._id)
                 .then(function (status) {
                    $location.url('/');
                 });

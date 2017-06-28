@@ -22,8 +22,8 @@
         };
         return api;
         
-        function unregister() {
-            var url = "/api/unregister";
+        function unregister(userId) {
+            var url = "/api/unregister/"+userId;
             return $http.post(url)
                 .then(function (response) {
                     return response.data;
@@ -78,6 +78,7 @@
             };
             return $http.post(url, credentials)
                 .then(function (response) {
+                    console.log(response);
                     return response.data;
                 });
         }
@@ -116,7 +117,6 @@
         }
 
         function findUserByUsername(username) {
-            console.log(username);
             var url = "/api/user?username="+username;
             return $http.get(url)
                 .then(function (response) {

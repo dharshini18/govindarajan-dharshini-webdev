@@ -22,7 +22,13 @@
                     .login(username, password)
                     .then(function (found) {
                         if (found !== null) {
-                            $location.url('/profile');
+                            var role = found.roles['0'];
+                            if(role === 'USER'){
+                                $location.url('/profile');
+                            }
+                            if(role === 'ADMIN'){
+                                $location.url('/admin');
+                            }
                         } else {
                             model.message = "Sorry, " + username + " not found. please try again!";
                         }
