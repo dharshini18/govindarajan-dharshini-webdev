@@ -53,7 +53,7 @@
                 .searchByVendor(url)
                 .then(function (response) {
                     console.log(response);
-                    model.foodTruckVendors = response;
+                    model.foodTruckVendor = response;
                 },function () {
                     model.error = "Sorry, We could not fetch the information you requested";
                 });

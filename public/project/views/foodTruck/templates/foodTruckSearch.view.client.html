@@ -7,16 +7,16 @@
         </div>
     </div>
 </nav>
-<div ng-show="!model.foodTrucks&&!model.foodTruckVendors" class="container-fluid center_div" id="buttonDiv">
+<div ng-show="!model.foodTrucks&&!model.foodTruckVendor" class="container-fluid center_div" id="buttonDiv">
     <a ng-click="template='../project/views/foodTruck/templates/search/searchByCity.view.client.html'"
        class="btn btn-default bt1">Search By City</a>
     <a ng-click="template='../project/views/foodTruck/templates/search/searchByVendor.view.client.html'"
        class="btn btn-default bt1">Search By Vendor</a>
 </div>
-<div ng-show="!model.foodTrucks&&!model.foodTruckVendors" class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
+<div ng-show="!model.foodTrucks&&!model.foodTruckVendor" class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
     <ng-include src="template"></ng-include>
 </div>
-<div ng-show="model.foodTrucks&&!model.foodTruckVendors" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
+<div ng-show="model.foodTrucks&&!model.foodTruckVendor" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
     <!-- 1st row verticaly centered text in the square columns -->
     <div ng-repeat="foodTruck in model.foodTrucks" class="square">
         <div class="content">
@@ -37,15 +37,18 @@
         </div>
     </div>
 </div>
-<div ng-show="!model.foodTrucks&&model.foodTruckVendors" class="container-fluid">
+<div ng-show="!model.foodTrucks&&model.foodTruckVendor" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
     <!-- 1st row verticaly centered text in the square columns -->
-    <div ng-repeat="foodTruckVendor in model.foodTruckVendors">
-        <div ng-repeat="foodTruck in model.foodTrucks" class="square">
-            <div class="content">
-                <div class="table">
-                    <div class="table-cell" id="div">
-                        {{foodTrukVendor.description}}
-                    </div>
+    <div class="square">
+        <div class="content">
+            <div class="table">
+                <div class="table-cell">
+                    <ul>
+                        <li>{{model.foodTruckVendor.description}}</li>
+                        <li>{{model.foodTruckVendor.phone}}</li>
+                        <li>{{model.foodTruckVendor.rating}}</li>
+                        <li>{{model.foodTruckVendor.url}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
