@@ -1,0 +1,12 @@
+<div class="container-fluid center_div" id="searchDiv">
+    <div class="form-group" id="dropdown">
+        <select class="form-control myDropDown" ng-model="region">
+            <option ng-repeat="city in model.cities" value="{{city.identifier}}">{{city.name}}</option>
+        </select>
+        <div class="form-group sign-btn">
+            <a ng-click="model.searchByCity(region)" class="btn btn-success btn-block">
+                Hit !
+            </a>
+        </div>
+    </div>
+</div>

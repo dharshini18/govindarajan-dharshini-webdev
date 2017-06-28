@@ -48,12 +48,26 @@
             .when('/recipeSearch',{
                 templateUrl: '../project/views/recipe/templates/recipeSearch.view.client.html',
                 controller: 'recipeSearchController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('/recipeList',{
-                templateUrl: '../project/views/recipe/templates/recipeList.view.client.html',
-                controller: 'recipeSearchController',
-                controllerAs: 'model'
+            .when('/foodTruckSearch',{
+                templateUrl: '../project/views/foodTruck/templates/foodTruckSearch.view.client.html',
+                controller: 'foodTruckSearchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/Search',{
+                templateUrl: '../project/views/home/templates/home.html',
+                controller: 'foodTruckSearchController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             });
     }
 

@@ -3,19 +3,31 @@
         .module('PRJ')
         .controller('recipeSearchController', recipeSearchController);
 
-    function recipeSearchController($location,recipeSearchService) {
+    function recipeSearchController($location,recipeSearchService,currentUser, userService) {
         var model = this;
         var APP_ID = "188ffe5c";
         var API_KEY = "d7ab5be4eadc755720c1fcfbdaa17e5d";
         model.searchByCourse = searchByCourse;
         model.searchByCuisine = searchByCuisine;
+        model.userId = currentUser._id;
+        model.renderUser = renderUser;
+        model.logout = logout;
 
         function init() {
-            model.ingredients = ['onion','tomatoes','celery','lime','apple',
-                'grape','orange','cognac','bourbon',
-                'cilantro','potato','salt','sugar','chocolate',
-                'paprika','ice','cream','wine','pasta','rice','water',
-                'butter','oil', 'carrot', 'beets', 'basil', 'pepper']
+            renderUser(currentUser);
+        }
+        init();
+
+        function renderUser(user) {
+            model.user = user;
+        }
+
+        function logout() {
+            userService
+                .logout()
+                .then(function () {
+                    $location.url('/login');
+                });
         }
 
         function searchByCourse(searchTerm) {
