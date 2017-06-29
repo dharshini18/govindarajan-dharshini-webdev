@@ -22,7 +22,7 @@
             return open.apply(this, args);
         };
     })();
-    
+
     function foodTruckSearchService($http) {
         this.findRegions = findRegions;
         this.findVendors = findVendors;

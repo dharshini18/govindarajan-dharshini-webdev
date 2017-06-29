@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top header-color">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -17,29 +17,117 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a ng-show=model.userId" ng-click="model.logout()">Logout</a></li>
+                <li><a ng-show="model.userId" ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-<div ng-show="!model.recipes" class="container-fluid center_div" id="buttonDiv">
+<div ng-show="!model.recipes&&!model.recipe" class="container-fluid center_div" id="buttonDiv">
     <a ng-click="template='../project/views/recipe/templates/search/searchByCourse.view.client.html'"
        class="btn btn-default bt1">Search By Course</a>
     <a ng-click="template='../project/views/recipe/templates/search/searchByCuisine.view.client.html'"
        class="btn btn-default bt1">Search By Cuisine</a>
 </div>
-<div ng-show="!model.recipes" class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
+<div ng-show="!model.recipes&&!model.recipe"
+     class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
     <ng-include src="template"></ng-include>
 </div>
-<div ng-show="model.recipes" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
+
+<div ng-show="model.recipes&&!model.recipe" class="container-fluid for-scroll-bar">
     <!-- 1st row verticaly centered text in the square columns -->
     <div ng-repeat="recipe in model.recipes" class="square">
         <div class="content">
             <div class="table">
                 <div class="table-cell">
-                    <img ng-src="{{recipe.imageUrlsBySize['90']}}" width="100%">
+                    <img class="displayImage" ng-src="{{recipe.imageUrlsBySize['90']}}" width="100%">
+                    <span><a ng-click="model.findRecipeById(recipe)" class="btn btn-default btn-block">Click</a></span>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div ng-show="model.recipe" class="container-fluid for-scroll-bar top-space">
+    <!--Main Container-->
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 myDiv">
+        <!--Left Container-->
+        <div class="col-md-5 col-lg-5 visible-lg visible-md verticalLine">
+            <hr>
+            <div class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.recipe.recipeName}}</label><br>
+                    <img ng-src="{{model.recipe.imageUrlsBySize['90']}}"/>
+                </span>
+                <hr>
+                <div class="row">
+                    <div class="col-md-3 col-lg-3">
+                        <label class="myLabel">Rating</label>
+                        <p>{{model.recipe.rating}}</p>
+                    </div>
+                    <div class="col-md-4 col-lg-4">
+                        <div class="row">
+                            <label class="myLabel">Course</label>
+                            <p>{{model.recipe.attributes.course['0']}}</p>
+                        </div>
+                    </div>
+                    <div ng-show="{{model.recipe.attribute.cuisine['0']}}" class="col-md-5 col-lg-5">
+                        <div class="row">
+                            <label class="myLabel">Cuisine</label>
+                            <p>{{model.recipe.attributes.cuisine['0']}}</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="col-md-12 col-lg-12">
+                    <div class="row">
+                        <label class="myLabel">Ingredients</label>
+                        <ul>
+                            <li class="li" ng-repeat="ingredient in model.ingredients">
+                                <p>{{ingredient}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <!--Left Container-->
+        <!--Right Container-->
+        <div class="col-md-7 col-lg-7">
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <div ng-show="{{model.recipe.flavors}}" class="row">
+                    <label class="myLabel">Flavours</label>
+                    <ul>
+                        <lable class="myLabel">Bitter</lable>
+                        <li class="li">{{model.recipe.flavors.bitter}}</li>
+                        <lable class="myLabel">Salt</lable>
+                        <li class="li">{{model.recipe.flavors.salty}}</li>
+                        <lable class="myLabel">Sour</lable>
+                        <li class="li">{{model.recipe.flavors.sour}}</li>
+                        <lable class="myLabel">Sweet</lable>
+                        <li class="li">{{model.recipe.flavors.sweet}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    <label class="myLabel">Total Prep-Time (Seconds)</label>
+                    <p>{{model.recipe.totalTimeInSeconds}}</p>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    <a ng-click=""
+                       class="btn btn-block btn-success">Favourite It !</a>
+                </div>
+            </div>
+        </div>
+        <!--Right Container-->
+    </div>
+    <!--Main Container-->
 </div>
