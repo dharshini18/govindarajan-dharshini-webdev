@@ -11,17 +11,17 @@
         this.addRecipeToUser = addRecipeToUser;
         this.addLikesToUser = addLikesToUser;
 
-        function addLikesToUser(userId, recipeId) {
+        function addLikesToUser(userId, recipe) {
             var url = "/api/likes/"+userId;
-            return $http.put(url, recipeId)
+            return $http.put(url, recipe)
                 .then(function (response) {
                     return response.data;
                 });
         }
 
-        function addRecipeToUser(userId, recipeId) {
+        function addRecipeToUser(userId, recipe) {
             var url = "/api/recipe/"+userId;
-            return $http.put(url, recipeId)
+            return $http.put(url, recipe)
                 .then(function (response) {
                     return response.data;
                 });

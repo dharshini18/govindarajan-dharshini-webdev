@@ -8,8 +8,8 @@ app.put('/api/likes/:userId', addLikesToUser);
 
 function addLikesToUser(req, res) {
     var userId = req.params['userId'];
-    var recipeId = req.body;
-    recipeModel.addLikesToUser(userId, recipeId)
+    var recipe = req.body;
+    recipeModel.addLikesToUser(userId, recipe._id)
         .then(function (status) {
             res.send(status)
         },function (err) {
@@ -19,8 +19,8 @@ function addLikesToUser(req, res) {
 
 function addRecipeToUser(req, res) {
     var userId = req.params['userId'];
-    var recipeId = req.body;
-    recipeModel.addRecipeToUser(userId, recipeId)
+    var recipe = req.body;
+    recipeModel.addRecipeToUser(userId, recipe._id)
         .then(function (status) {
             res.send(status)
         },function (err) {
@@ -39,14 +39,13 @@ function addRecipe(req, res) {
 }
 
 function findRecipeById(req, res) {
-    console.log("Inside findRecipeById");
     var recipeId = req.params['recipeId'];
     recipeModel.findRecipeById(recipeId)
         .then(function (recipe) {
             if(recipe){
                 res.json(recipe);
             }else{
-                res.send(null);
+                res.send(undefined);
             }
         },function (err) {
             res.send(err);

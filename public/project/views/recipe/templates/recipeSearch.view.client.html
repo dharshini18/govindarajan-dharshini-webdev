@@ -39,8 +39,9 @@
         <div class="content">
             <div class="table">
                 <div class="table-cell">
-                    <img class="displayImage" ng-src="{{recipe.imageUrlsBySize['90']}}" width="100%">
-                    <span><a ng-click="model.findRecipeById(recipe)" class="btn btn-default btn-block">Click</a></span>
+                    <a ng-click="model.findRecipeById(recipe)">
+                        <img class="displayImage" ng-src="{{recipe.imageUrlsBySize['90']}}" width="100%">
+                    </a>
                 </div>
             </div>
         </div>

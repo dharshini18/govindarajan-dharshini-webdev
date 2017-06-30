@@ -41,11 +41,9 @@
             return recipeSearchService
                 .findRecipeById(recipeId)
                 .then(function (response) {
-                    if (response === null) {
+                    if (response === undefined || response === "" || response === null) {
                         var newRecipe = {
                             userId: userId,
-                            course: recipe.attributes.course['0'],
-                            cuisine: recipe.attributes.cuisine['0'],
                             recipeId: recipe.id,
                             rating: recipe.rating,
                             ingredients: recipe.ingredients,
@@ -57,7 +55,7 @@
                             .addRecipe(newRecipe)
                             .then(function (response) {
                                 return recipeSearchService
-                                    .addLikesToUser(userId, response._id)
+                                    .addLikesToUser(userId, response)
                                     .then(function (status) {
                                         model.message = "Yay ! Thanks for the like";
                                     }, function (err) {
@@ -68,7 +66,7 @@
                             });
                     } else {
                         return recipeSearchService
-                            .addLikesToUser(userId, response._id)
+                            .addLikesToUser(userId, response)
                             .then(function (status) {
                                 model.message = "Yay ! Thanks for the like";
                             }, function (status) {
@@ -87,11 +85,9 @@
             return recipeSearchService
                 .findRecipeById(recipeId)
                 .then(function (response) {
-                    if (response === null) {
+                    if (response === undefined || response === "" || response === null) {
                         var newRecipe = {
                             userId: userId,
-                            course: recipe.attributes.course['0'],
-                            cuisine: recipe.attributes.cuisine['0'],
                             recipeId: recipe.id,
                             rating: recipe.rating,
                             ingredients: recipe.ingredients,
@@ -102,8 +98,9 @@
                         return recipeSearchService
                             .addRecipe(newRecipe)
                             .then(function (response) {
+                                console.log(response);
                                 return recipeSearchService
-                                    .addRecipeToUser(userId, response._id)
+                                    .addRecipeToUser(userId, response)
                                     .then(function (status) {
                                         model.message = "Yay ! Recipe was added to your favourites";
                                     }, function (err) {
@@ -113,8 +110,9 @@
                                 model.error = "Sorry the recipe could not be updated";
                             });
                     } else {
+                        console.log(response.data);
                         return recipeSearchService
-                            .addRecipeToUser(userId, response._id)
+                            .addRecipeToUser(userId, response)
                             .then(function (status) {
                                 model.message = "Yay ! Recipe was added to your favourites";
                             }, function (status) {

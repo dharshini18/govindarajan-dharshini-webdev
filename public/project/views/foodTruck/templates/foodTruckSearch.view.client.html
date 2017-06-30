@@ -28,44 +28,238 @@
     <a ng-click="template='../project/views/foodTruck/templates/search/searchByVendor.view.client.html'"
        class="btn btn-default bt1">Search By Vendor</a>
 </div>
-<div ng-show="!model.foodTrucks&&!model.foodTruckVendor" class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
+<div ng-show="!model.foodTrucks&&!model.foodTruckVendor"
+     class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12" id="myDiv">
     <ng-include src="template"></ng-include>
 </div>
-<div ng-show="model.foodTrucks&&!model.foodTruckVendor" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
+<div ng-show="model.foodTrucks&&!model.foodTruckVendor&&!model.foodTruck" class="container-fluid"
+     style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
     <!-- 1st row verticaly centered text in the square columns -->
     <div ng-repeat="foodTruck in model.foodTrucks" class="square">
-        <div class="content">
-            <div class="table">
-                <div class="table-cell">
-                    <ul>
-                        <label>Name</label>
-                        <li>{{foodTruck.identifier}}</li>
-                        <label>Phone</label>
-                        <li>{{foodTruck.phone}}</li>
-                        <label>Region</label>
-                        <li>{{foodTruck.region}}</li>
-                        <label>Rating</label>
-                        <li>{{foodTruck.rating}}</li>
-                    </ul>
+        <a ng-click="model.findFoodTruckCity(foodTruck)">
+            <div class="content">
+                <div class="table">
+                    <div class="table-cell">
+                        <ul>
+                            <div class="col-sm-12 col-md-12 col-lg-12 col-xs-12 divText">
+                                <label class="myLabel">FoodTruck</label>
+                                <p>{{foodTruck.name}}</p>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
-<div ng-show="!model.foodTrucks&&model.foodTruckVendor" class="container-fluid" style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
+<div ng-show="!model.foodTrucks&&model.foodTruckVendor&&!model.foodTruck&&!model.foodTruckVendorForDiv"
+     class="container-fluid"
+     style="overflow:auto; position:absolute; top:50px; left: 0px; right:0px; bottom:50px;">
     <!-- 1st row verticaly centered text in the square columns -->
     <div class="square">
         <div class="content">
             <div class="table">
-                <div class="table-cell">
-                    <ul>
-                        <li>{{model.foodTruckVendor.description}}</li>
-                        <li>{{model.foodTruckVendor.phone}}</li>
-                        <li>{{model.foodTruckVendor.rating}}</li>
-                        <li>{{model.foodTruckVendor.url}}</li>
-                    </ul>
+                <div ng-show="model.foodTruckVendor.images.header['0']" class="table-cell">
+                    <a ng-click="model.findFoodTruckVendor(model.foodTruckVendor)">
+                        <img ng-src="{{model.foodTruckVendor.images.header['0']}}"/>
+                    </a>
+                </div>
+                <div ng-show="!model.foodTruckVendor.images.header['0']" class="table-cell">
+                    <a ng-click="model.findFoodTruckVendor(model.foodTruckVendor)">
+                        <img src="../../../../project/vendor/images/athenas-food-truck-bw-58.jpg"/>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div ng-show="model.foodTruck" class="container-fluid for-scroll-bar top-space">
+    <!--Main Container-->
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 myDiv">
+        <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+        <!--Left Container-->
+        <div class="col-md-5 col-lg-5 visible-lg visible-md verticalLine">
+            <hr>
+            <div class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.foodTruck.name}}</label><br>
+                    <img src="../../../../project/vendor/images/athenas-food-truck-bw-58.jpg" width="30%">
+                </span>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4 col-lg-4">
+                    <label class="myLabel">Rating</label>
+                    <p>{{model.foodTruck.rating}}</p>
+                </div>
+                <div class="col-md-8 col-lg-8">
+                    <div class="row">
+                        <label class="myLabel">Region</label>
+                        <p>{{model.foodTruck.region}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    <label class="myLabel">Description</label>
+                    <p>{{model.foodTruck.description}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--Left Container-->
+        <!--Right Container-->
+        <div class="col-md-7 col-lg-7">
+            <hr>
+            <div class="hidden-lg hidden-md visible-sm-inline-block visible-xs-inline-block col-xs-12 col-sm-12">
+                <div class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.foodTruck.name}}</label><br>
+                    <img src="../../../../project/vendor/images/athenas-food-truck-bw-58.jpg">
+                </span>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <div ng-show="{{model.foodTruck.open}}" class="row">
+                    <label class="myLabel">Flavours</label>
+                    <ul>
+                        <lable class="myLabel">Location</lable>
+                        <li class="li">{{model.foodTruck.open['0'].display}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <label class="myLabel">Website</label>
+                    <a href="{{model.foodTruck.url}}"></a>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <label class="myLabel">Phone</label>
+                    <p>{{model.foodTruck.phone}}</p>
+                </div>
+            </div>
+
+            <hr>
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <a ng-click="model.addToFavourites(model.foodTruck)"
+                       class="btn btn-block btn-success form-control">Add to Favourites!</a>
+                    <a ng-click="model.addLikes(model.foodTruck)" class="btn btn-primary btn-block form-control">
+                        <i class="glyphicon glyphicon-thumbs-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Right Container-->
+    </div>
+    <!--Main Container-->
+</div>
+
+<div ng-show="model.foodTruckVendorForDiv" class="container-fluid for-scroll-bar top-space">
+    <!--Main Container-->
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 myDiv">
+        <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
+        <!--Left Container-->
+        <div class="col-md-5 col-lg-5 visible-lg visible-md verticalLine">
+            <hr>
+            <div class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.foodTruckVendorForDiv.name}}</label><br>
+                    <img ng-src="{{model.foodTruckVendorForDiv.images.header['0']}}" width="30%">
+                </span>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4 col-lg-4">
+                    <label class="myLabel">Rating</label>
+                    <p>{{model.foodTruckVendorForDiv.rating}}</p>
+                </div>
+                <div class="col-md-8 col-lg-8">
+                    <div class="row">
+                        <label class="myLabel">Region</label>
+                        <p>{{model.foodTruckVendorForDiv.region}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    <label class="myLabel">Description</label>
+                    <p>{{model.foodTruckVendorForDiv.description}}</p>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <!--Left Container-->
+        <!--Right Container-->
+        <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12">
+            <hr>
+            <div class="hidden-lg hidden-md visible-sm visible-xs col-xs-12 col-sm-12">
+                <div ng-show="model.foodTruckVendorForDiv.images" class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.foodTruckVendorForDiv.name}}</label><br>
+                    <img ng-src="{{model.foodTruckVendorForDiv.images.header['0']}}" width="30%">
+                </span>
+                </div>
+
+                <div ng-show="!model.foodTruckVendorForDiv.images" class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.foodTruckVendorForDiv.name}}</label><br>
+                    <img src="../../../../project/vendor/images/athenas-food-truck-bw-58.jpg" width="30%">
+                </span>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div ng-show="{{model.foodTruckVendorForDiv.open}}" class="row">
+                    <label class="myLabel">Location</label>
+                    <ul>
+                        <li class="li">{{model.foodTruckVendorForDiv.open}}</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <label class="myLabel">Website</label>
+                    <a href="{{model.foodTruckVendorForDiv.url}}">
+                        {{model.foodTruckVendorForDiv.url}}</a>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <label class="myLabel">Phone</label>
+                    <p>{{model.foodTruckVendorForDiv.phone}}</p>
+                </div>
+            </div>
+
+            <hr>
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="row">
+                    <a ng-click="model.addToFavourites(model.foodTruckVendorForDiv)"
+                       class="btn btn-block btn-success form-control">Add to Favourites!</a>
+                    <a ng-click="model.addLikes(model.foodTruckVendorForDiv)" class="btn btn-primary btn-block form-control">
+                        <i class="glyphicon glyphicon-thumbs-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Right Container-->
+    </div>
+    <!--Main Container-->
 </div>

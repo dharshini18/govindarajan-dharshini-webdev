@@ -5,8 +5,8 @@
 
     (function () {
         /*The following snippet of code belongs to a third party.
-        Added the snippet of code to eliminate the CORS issue.
-        The snippet is open source.*/
+         Added the snippet of code to eliminate the CORS issue.
+         The snippet is open source.*/
         var cors_api_host = 'cors-anywhere.herokuapp.com';
         var cors_api_url = 'https://' + cors_api_host + '/';
         var slice = [].slice;
@@ -28,6 +28,43 @@
         this.findVendors = findVendors;
         this.searchByCity = searchByCity;
         this.searchByVendor = searchByVendor;
+        this.findFoodTruckById = findFoodTruckById;
+        this.addFoodTruck = addFoodTruck;
+        this.addFoodTruckToUser = addFoodTruckToUser;
+        this.addLikesToUser = addLikesToUser;
+
+        function findFoodTruckById(foodTruckId) {
+            var url = "/api/foodTruck/" + foodTruckId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addFoodTruck(foodTruck) {
+            console.log("Inside client");
+            var url = "/api/foodTruck";
+            return $http.post(url, foodTruck)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addFoodTruckToUser(userId, foodTruck) {
+            var url = "/api/foodTruck/" + userId;
+            return $http.put(url, foodTruck)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function addLikesToUser(userId, foodTruck) {
+            var url = "/api/likes/" + userId;
+            return $http.put(url, foodTruck)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function findVendors(url) {
             return $http.get(url)
@@ -49,7 +86,7 @@
                     return response.data;
                 });
         }
-        
+
         function searchByCity(url) {
             return $http.get(url)
                 .then(function (response) {

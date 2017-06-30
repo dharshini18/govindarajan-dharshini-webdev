@@ -23,5 +23,5 @@ function addRecipe(recipe) {
 }
 
 function findRecipeById(recipeId) {
-    return recipeModel.findOne({id: recipeId});
+    return recipeModel.findOne({recipeId: recipeId});
 }

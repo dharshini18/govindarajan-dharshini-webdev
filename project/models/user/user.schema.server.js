@@ -10,6 +10,8 @@ var userSchema = mongoose.Schema({
     roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}],
     recipes: [{type: mongoose.Schema.ObjectId, ref: "RecipeModel"}],
     likes: [{type: String}],
+    foodTrucks : [{type: mongoose.Schema.ObjectId, ref: "FoodTruckModel"}],
+    fdlikes: [{type: String}],
     facebook: {
         id:    String,
         token: String

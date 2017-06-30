@@ -1,10 +1,12 @@
 body {
     padding-top: 50px;
 }
+
 .backgroundImage {
     background: url("../../vendor/images/img6.jpg") no-repeat scroll;
     height: 100px;
 }
+
 .starter-template {
     padding: 40px 15px;
     text-align: center;
@@ -108,21 +110,26 @@ body {
 .myDropDown {
     height: 40px;
     overflow: auto;
-    z-index:600;
+    z-index: 600;
 }
-li{
+
+li {
     color: white;
 }
-label{
-    color:white;
+
+label {
+    color: white;
     font-size: medium;
 }
-.display{
-    color:white;
+
+.display {
+    color: white;
 }
-#div{
-    color:white;
+
+#div {
+    color: white;
 }
+
 .thumbnail img {
     width: 100%;
 }
@@ -145,9 +152,11 @@ label{
 footer {
     margin: 50px 0;
 }
-.fit-height{
+
+.fit-height {
     overflow: auto;
 }
+
 /*
  * Global add-ons
  */
@@ -175,6 +184,7 @@ footer {
 .sidebar {
     display: none;
 }
+
 @media (min-width: 768px) {
     .sidebar {
         position: fixed;
@@ -197,17 +207,18 @@ footer {
     margin-bottom: 20px;
     margin-left: -20px;
 }
+
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
 }
+
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
     color: #fff;
     background-color: #428bca;
 }
-
 
 /*
  * Main content
@@ -216,16 +227,17 @@ footer {
 .main {
     padding: 20px;
 }
+
 @media (min-width: 768px) {
     .main {
         padding-right: 40px;
         padding-left: 40px;
     }
 }
+
 .main .page-header {
     margin-top: 0;
 }
-
 
 /*
  * Placeholder dashboard ideas
@@ -235,41 +247,51 @@ footer {
     margin-bottom: 30px;
     text-align: center;
 }
+
 .placeholders h4 {
     margin-bottom: 0;
 }
+
 .placeholder {
     margin-bottom: 20px;
 }
+
 .placeholder img {
     display: inline-block;
     border-radius: 50%;
 }
-.for-scroll-bar{
-    overflow:auto;
-    position:absolute;
-    top:50px;
+
+.for-scroll-bar {
+    overflow: auto;
+    position: absolute;
+    top: 50px;
     left: 0px;
-    right:0px;
-    bottom:50px;
+    right: 0px;
+    bottom: 50px;
 }
+
 .navbar-default .navbar-brand {
     color: white;
 }
-.top-space{
+
+.top-space {
     margin-top: 50px;
 }
-.myDiv{
+
+.myDiv {
     background-color: whitesmoke;
 }
+
 .verticalLine {
     border-right: thick solid #ff0000;
 }
-.li{
+
+.li {
     font-style: italic;
     font-family: Georgia;
     color: black;
 }
-.myLabel{
+
+.myLabel {
     color: orangered;
 }

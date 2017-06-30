@@ -13,8 +13,26 @@ userModel.updateProfile = updateProfile;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.addRecipeToUser = addRecipeToUser;
 userModel.addLikesToUser = addLikesToUser;
+userModel.addFoodTruckToUser = addFoodTruckToUser;
+userModel.addFdLikesToUser = addFdLikesToUser;
 
 module.exports = userModel;
+
+function addFdLikesToUser(userId, foodTruckId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.fdlikes.push(foodTruckId)
+            return user.save();
+        });
+}
+
+function addFoodTruckToUser(userId, foodTruckId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.foodTrucks.push(foodTruckId)
+            return user.save();
+        });
+}
 
 function addLikesToUser(userId, recipeId) {
     return userModel.findById(userId)
