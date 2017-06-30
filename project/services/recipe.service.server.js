@@ -3,20 +3,9 @@ var recipeModel = require('../models/recipe/recipe.model.server');
 
 app.get('/api/recipe/:recipeId', findRecipeById);
 app.get('/api/recipes/:userId', findRecipesForUser);
-app.get('/api/trucks/:userId', findFoodTrucksForUser);
 app.post('/api/recipe', addRecipe);
 app.put('/api/recipe/:userId', addRecipeToUser);
 app.put('/api/likes/:userId', addLikesToUser);
-
-function findFoodTrucksForUser(req, res) {
-    var userId = req.params['userId'];
-    recipeModel.findFoodTrucksForUser(userId)
-        .then(function (foodTruck) {
-            res.json(foodTruck)
-        }, function (err) {
-            res.send(err);
-        });
-}
 
 function findRecipesForUser(req, res) {
     var userId = req.params['userId'];

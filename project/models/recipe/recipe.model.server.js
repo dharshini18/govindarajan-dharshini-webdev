@@ -8,19 +8,12 @@ recipeModel.addRecipe = addRecipe;
 recipeModel.addRecipeToUser = addRecipeToUser;
 recipeModel.addLikesToUser = addLikesToUser;
 recipeModel.findRecipesForUser= findRecipesForUser;
-recipeModel.findFoodTrucksForUser= findFoodTrucksForUser;
 
 module.exports = recipeModel;
 
 function findRecipesForUser(userId) {
     return recipeModel.find({userId: userId})
         .populate('recipes')
-        .exec();
-}
-
-function findFoodTrucksForUser(userId) {
-    return recipeModel.find({userId: userId})
-        .populate('foodTrucks')
         .exec();
 }
 

@@ -5,6 +5,18 @@ app.get('/api/foodTruck/:foodTruckId', findFoodTruckById);
 app.post('/api/foodTruck', addFoodTruck);
 app.put('/api/foodTruck/:userId', addFoodTruckToUser);
 app.put('/api/likes/:userId', addLikesToUser);
+app.get('/api/trucks/:userId', findFoodTrucksForUser);
+
+function findFoodTrucksForUser(req, res) {
+    var userId = req.params['userId'];
+    foodTruckModel.findFoodTrucksForUser(userId)
+        .then(function (foodTruck) {
+            res.json(foodTruck)
+        }, function (err) {
+            res.send(err);
+        });
+}
+
 
 function addLikesToUser(req, res) {
     var userId = req.params['userId'];

@@ -32,6 +32,15 @@
         this.addFoodTruck = addFoodTruck;
         this.addFoodTruckToUser = addFoodTruckToUser;
         this.addLikesToUser = addLikesToUser;
+        this.findFoodTrucksForUser = findFoodTrucksForUser;
+
+        function findFoodTrucksForUser(userId) {
+            var url = "/api/trucks/"+userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function findFoodTruckById(foodTruckId) {
             var url = "/api/foodTruck/" + foodTruckId;

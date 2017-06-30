@@ -7,8 +7,15 @@ foodTruckModel.findFoodTruckById = findFoodTruckById;
 foodTruckModel.addFoodTruck = addFoodTruck;
 foodTruckModel.addFoodTruckToUser = addFoodTruckToUser;
 foodTruckModel.addLikesToUser = addLikesToUser;
+foodTruckModel.findFoodTrucksForUser = findFoodTrucksForUser;
 
 module.exports = foodTruckModel;
+
+function findFoodTrucksForUser(userId) {
+    return foodTruckModel.find({userId: userId})
+        .populate('foodTrucks')
+        .exec();
+}
 
 function addLikesToUser(userId, foodTruckId) {
     return userModel.addFdLikesToUser(userId, foodTruckId);
