@@ -58,42 +58,51 @@
                     <label class="myLabel">{{model.recipe.recipeName}}</label><br>
                     <img ng-src="{{model.recipe.imageUrlsBySize['90']}}"/>
                 </span>
-                <hr>
-                <div class="row">
-                    <div class="col-md-3 col-lg-3">
-                        <label class="myLabel">Rating</label>
-                        <p>{{model.recipe.rating}}</p>
-                    </div>
-                    <div class="col-md-4 col-lg-4">
-                        <div class="row">
-                            <label class="myLabel">Course</label>
-                            <p>{{model.recipe.attributes.course['0']}}</p>
-                        </div>
-                    </div>
-                    <div ng-show="{{model.recipe.attribute.cuisine['0']}}" class="col-md-5 col-lg-5">
-                        <div class="row">
-                            <label class="myLabel">Cuisine</label>
-                            <p>{{model.recipe.attributes.cuisine['0']}}</p>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-                <div class="col-md-12 col-lg-12">
-                    <div class="row">
-                        <label class="myLabel">Ingredients</label>
-                        <ul>
-                            <li class="li" ng-repeat="ingredient in model.ingredients">
-                                <p>{{ingredient}}</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <hr>
             </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-3 col-lg-3">
+                    <label class="myLabel">Rating</label>
+                    <p>{{model.recipe.rating}}</p>
+                </div>
+                <div class="col-md-4 col-lg-4">
+                    <div class="row">
+                        <label class="myLabel">Course</label>
+                        <p>{{model.recipe.attributes.course['0']}}</p>
+                    </div>
+                </div>
+                <div ng-show="{{model.recipe.attribute.cuisine['0']}}" class="col-md-5 col-lg-5">
+                    <div class="row">
+                        <label class="myLabel">Cuisine</label>
+                        <p>{{model.recipe.attributes.cuisine['0']}}</p>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="col-md-12 col-lg-12">
+                <div class="row">
+                    <label class="myLabel">Ingredients</label>
+                    <ul>
+                        <li class="li" ng-repeat="ingredient in model.ingredients">
+                            <p>{{ingredient}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
         </div>
         <!--Left Container-->
         <!--Right Container-->
         <div class="col-md-7 col-lg-7">
+            <hr>
+            <div class="hidden-lg hidden-md visible-sm-inline-block visible-xs-inline-block col-xs-12 col-sm-12">
+                <div class="row">
+                <span class="imageInDiv">
+                    <label class="myLabel">{{model.recipe.recipeName}}</label><br>
+                    <img ng-src="{{model.recipe.imageUrlsBySize['90']}}"/>
+                </span>
+                </div>
+            </div>
             <hr>
             <div class="col-md-12 col-lg-12">
                 <div ng-show="{{model.recipe.flavors}}" class="row">
@@ -112,7 +121,7 @@
             </div>
             <hr>
 
-            <div class="col-md-12 col-lg-12">
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                 <div class="row">
                     <label class="myLabel">Total Prep-Time (Seconds)</label>
                     <p>{{model.recipe.totalTimeInSeconds}}</p>
@@ -120,10 +129,17 @@
             </div>
             <hr>
 
-            <div class="col-md-12 col-lg-12">
+            <div class="row">
+            </div>
+
+            <hr>
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
                 <div class="row">
-                    <a ng-click=""
-                       class="btn btn-block btn-success">Favourite It !</a>
+                    <a ng-click="model.addToFavourites(model.recipe)"
+                       class="btn btn-block btn-success form-control">Add to Favourites!</a>
+                    <a ng-click="model.addLikes(model.recipe)" class="btn btn-primary btn-block form-control">
+                        <i class="glyphicon glyphicon-thumbs-up"></i>
+                    </a>
                 </div>
             </div>
         </div>

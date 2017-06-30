@@ -1,6 +1,7 @@
-/**
+/*
+/!**
  * Created by Dharshini on 6/15/2017.
- */
+ *!/
 console.log('Session');
 var app = require('../../express');
 
@@ -11,4 +12,4 @@ app.get('/api/assignment/session/:name/:value',
     req.session[name] = value;
     console.log(req.session);
     res.send(req.session);
-});
+});*/

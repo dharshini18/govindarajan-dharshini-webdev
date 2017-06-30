@@ -1,3 +1,4 @@
+/*
 var app = require('../../express');
 var widgetModel = require('../models/widget/widget.model.server');
 
@@ -127,4 +128,4 @@ function findAllWidgetsForPage(req, res) {
         },function (err) {
             res.send(err)
         });
-}
+}*/

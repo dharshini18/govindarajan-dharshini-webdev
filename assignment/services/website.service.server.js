@@ -1,3 +1,4 @@
+/*
 var app = require('../../express');
 var websiteModel = require('../models/website/website.model.server');
 
@@ -55,4 +56,4 @@ function findAllWebsitesForUser(req, res) {
         .then(function (websites) {
             res.json(websites)
         });
-}
+}*/

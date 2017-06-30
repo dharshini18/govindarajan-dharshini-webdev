@@ -9,36 +9,24 @@ userModel.findUserByUsername = findUserByUsername;
 userModel.findUserByCredentials = findUserByCredentials;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-userModel.addWebsite = addWebsite;
-userModel.deleteWebsite = deleteWebsite;
 userModel.updateProfile = updateProfile;
 userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.addRecipeToUser = addRecipeToUser;
 
 module.exports = userModel;
+
+function addRecipeToUser(userId, recipeId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.recipes.push(recipeId)
+            return user.save();
+        });
+}
 
 function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id': facebookId});
 }
 
-function deleteWebsite(userId, websiteId) {
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            var index = user.websites.indexOf(websiteId);
-            user.websites.splice(index, 1);
-            return user.save();
-        });
-}
-
-function addWebsite(userId, website) {
-    console.log(userId);
-    return userModel
-        .findById(userId)
-        .then(function (user) {
-            user.websites.push(website);
-            return user.save();
-        });
-}
 
 function createUser(user) {
     if(user.roles){

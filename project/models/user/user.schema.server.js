@@ -7,7 +7,9 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: {type: String, unique: true},
     phone: String,
-    roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN', 'BLOGGER']}],
+    roles: [{type: String, default: 'USER', enum: ['USER', 'ADMIN']}],
+    recipes: [{type: mongoose.Schema.ObjectId, ref: "RecipeModel"}],
+    likes: [{type: String}],
     facebook: {
         id:    String,
         token: String

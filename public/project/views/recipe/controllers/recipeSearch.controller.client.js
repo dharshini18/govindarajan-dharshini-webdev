@@ -13,7 +13,8 @@
         model.renderUser = renderUser;
         model.logout = logout;
         model.findRecipeById = findRecipeById;
-
+        model.addToFavourites = addToFavourites;
+        model.addLikes = addLikes;
 
         function init() {
             renderUser(currentUser);
@@ -33,8 +34,51 @@
                 });
         }
 
+        function addLikes(recipe) {
+            var user = model.user;
+            var userId = user._id;
+            recipeSearchService
+                .addLikes(userId, recipe)
+                .then(function (status) {
+                    model.message = "Yes! Thanks for the thumbs up"
+                }, function (status) {
+                    model.error = "Oops! Looks like something went wrong"
+                });
+        }
+
+        function addToFavourites(recipe) {
+            console.log("Inside Add Fav");
+            var user = model.user;
+            var userId = user._id;
+            var recipeId = recipe.id;
+            return recipeSearchService
+                .findRecipeById(recipeId)
+                .then(function (recipeNew) {
+                    return recipeSearchService
+                        .addRecipeToUser(userId, recipeNew._id)
+                        .then(function (status) {
+                            model.message = "Yes! Your favourites list has been updated";
+                        }, function (status) {
+                            model.error = "Oops! Looks like something went wrong";
+                        });
+
+                }, function () {
+                    return recipeSearchService.addRecipe(recipe)
+                        .then(function (recipeNew) {
+                            var recipeNewId = recipeNew._id;
+                            return recipeSearchService
+                                .addRecipeToUser(userId, recipeNewId)
+                                .then(function (status) {
+                                    model.message = "Yes! Your favourites list has been updated";
+                                }, function (status) {
+                                    model.error = "Oops! Looks like something went wrong";
+                                });
+                        });
+                });
+        }
+
         function findRecipeById(recipe) {
-            if(recipe !== 'undefined'){
+            if (recipe !== 'undefined') {
                 console.log(recipe);
                 model.recipe = recipe;
                 model.ingredients = recipe.ingredients;
