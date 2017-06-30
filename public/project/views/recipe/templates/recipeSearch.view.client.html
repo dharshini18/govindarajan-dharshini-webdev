@@ -50,6 +50,8 @@
 <div ng-show="model.recipe" class="container-fluid for-scroll-bar top-space">
     <!--Main Container-->
     <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 myDiv">
+        <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
+        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
         <!--Left Container-->
         <div class="col-md-5 col-lg-5 visible-lg visible-md verticalLine">
             <hr>
@@ -130,6 +132,8 @@
             <hr>
 
             <div class="row">
+                <label class="myLabel">Recipe Id</label>
+                <p>{{model.recipe.id}}</p>
             </div>
 
             <hr>

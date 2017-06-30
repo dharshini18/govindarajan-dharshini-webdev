@@ -12,8 +12,17 @@ userModel.deleteUser = deleteUser;
 userModel.updateProfile = updateProfile;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.addRecipeToUser = addRecipeToUser;
+userModel.addLikesToUser = addLikesToUser;
 
 module.exports = userModel;
+
+function addLikesToUser(userId, recipeId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.likes.push(recipeId)
+            return user.save();
+        });
+}
 
 function addRecipeToUser(userId, recipeId) {
     return userModel.findById(userId)

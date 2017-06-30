@@ -9,6 +9,15 @@
         this.findRecipeById = findRecipeById;
         this.addRecipe = addRecipe;
         this.addRecipeToUser = addRecipeToUser;
+        this.addLikesToUser = addLikesToUser;
+
+        function addLikesToUser(userId, recipeId) {
+            var url = "/api/likes/"+userId;
+            return $http.put(url, recipeId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function addRecipeToUser(userId, recipeId) {
             var url = "/api/recipe/"+userId;
@@ -27,11 +36,9 @@
         }
 
         function findRecipeById(recipeId) {
-            console.log("Inside findRecipeById");
             var url = "/api/recipe/"+recipeId;
             return $http.get(url)
                 .then(function (response) {
-                    console.log(response);
                     return response.data;
                 });
         }

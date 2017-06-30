@@ -4,6 +4,18 @@ var recipeModel = require('../models/recipe/recipe.model.server');
 app.get('/api/recipe/:recipeId', findRecipeById);
 app.post('/api/recipe', addRecipe);
 app.put('/api/recipe/:userId', addRecipeToUser);
+app.put('/api/likes/:userId', addLikesToUser);
+
+function addLikesToUser(req, res) {
+    var userId = req.params['userId'];
+    var recipeId = req.body;
+    recipeModel.addLikesToUser(userId, recipeId)
+        .then(function (status) {
+            res.send(status)
+        },function (err) {
+            res.send(err);
+        });
+}
 
 function addRecipeToUser(req, res) {
     var userId = req.params['userId'];
@@ -31,7 +43,11 @@ function findRecipeById(req, res) {
     var recipeId = req.params['recipeId'];
     recipeModel.findRecipeById(recipeId)
         .then(function (recipe) {
-            res.json(recipe);
+            if(recipe){
+                res.json(recipe);
+            }else{
+                res.send(null);
+            }
         },function (err) {
             res.send(err);
         });
