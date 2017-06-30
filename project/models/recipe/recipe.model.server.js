@@ -18,6 +18,5 @@ function addRecipe(recipe) {
 }
 
 function findRecipeById(recipeId) {
-    console("Inside server model");
     return recipeModel.findOne({id: recipeId});
 }
