@@ -295,3 +295,11 @@ footer {
 .myLabel {
     color: orangered;
 }
+.profile{
+    margin-top: 5px;
+}
+.myContent{
+    color: black;
+    font-family: Georgia;
+    font-style: italic;
+}

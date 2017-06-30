@@ -1,0 +1,11 @@
+<div class="container-fluid center_div col-lg-10 col-lg-offset-2 col-md-10 col-md-offset-2 col-xs-12">
+    <div class="col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1 myDiv">
+        <label class="myLabel">FoodTruck Name</label>
+        <div ng-repeat="foodTruck in model.foodTrucks">
+            <ul>
+                <li class="myContent">{{foodTruck.name}}</li>
+            </ul>
+            <hr>
+        </div>
+    </div>
+</div>

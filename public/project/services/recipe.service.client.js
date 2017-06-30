@@ -10,6 +10,24 @@
         this.addRecipe = addRecipe;
         this.addRecipeToUser = addRecipeToUser;
         this.addLikesToUser = addLikesToUser;
+        this.findRecipesForUser = findRecipesForUser;
+        this.findFoodTrucksForUser = findFoodTrucksForUser;
+
+        function findFoodTrucksForUser(userId) {
+            var url = "/api/trucks/"+userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+        
+        function findRecipesForUser(userId) {
+            var url = "/api/recipes/"+userId;
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function addLikesToUser(userId, recipe) {
             var url = "/api/likes/"+userId;

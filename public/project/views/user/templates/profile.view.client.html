@@ -1,52 +1,42 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
+<nav class="navbar navbar-inverse navbar-fixed-top header-color">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                Profile
-            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <p class="navbar-text pull-left">
+                <a href="#!/Search" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">Profile</a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a ng-show="model.userId" ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
 </nav>
 
-<div class="container-fluid center_div col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-xs-12">
-    <form>
-        <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
-        <div ng-show="model.message" class="alert alert-info">{{model.message}}</div>
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input ng-model="model.user.username"
-                   type="text"
-                   class="form-control"
-                   id="username"
-                   placeholder="Username">
-        </div>
-        <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email"
-                   ng-model="model.user.email"
-                   class="form-control"
-                   id="email"
-                   placeholder="alice@wonderland.com">
-        </div>
-        <div class="form-group">
-            <label for="first-name">First Name</label>
-            <input ng-model="model.user.firstName"
-                   type="text"
-                   class="form-control"
-                   id="first-name"
-                   placeholder="Alice">
-        </div>
-        <div class="form-group">
-            <label for="last-name">Last Name</label>
-            <input ng-model="model.user.lastName"
-                   type="text"
-                   class="form-control"
-                   id="last-name"
-                   placeholder="Wonderland">
-        </div>
-    </form>
-    <a class="btn btn-success btn-block" href="#!/Search">Search</a>
-    <a class="btn btn-warning btn-block" ng-click="model.update(model.user)">Update</a>
-    <a class="btn btn-primary btn-block" ng-click="model.unregister(model.user)">UnRegister</a>
-    <a class="btn btn-danger  btn-block" ng-click="model.logout()">Logout</a>
+<div class="container-fluid center_div" id="buttonDiv">
+    <a href="#!/Search"
+       class="btn btn-default bt1">Search</a>
+    <a ng-click="template='../../../../project/views/user/templates/include/updateProfile.view.client.html'"
+       class="btn btn-default bt1">Update Profile</a>
+    <a ng-click="template='../../../../project/views/user/templates/include/deleteProfile.view.client.html'"
+       class="btn btn-default bt1">Delete Profile</a>
+    <a ng-click="template='../../../../project/views/user/templates/include/myrecipes.view.client.html'"
+       class="btn btn-default bt1">My Recipes</a>
+    <a ng-click="template='../../../../project/views/user/templates/include/myfoodtrucks.view.client.html'"
+       class="btn btn-default bt1">My FoodTrucks</a>
+</div>
+
+<div ng-show="model.userId"
+     class="container-fluid center_div col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-sm-12 profile" id="myDiv">
+    <ng-include src="template"></ng-include>
 </div>

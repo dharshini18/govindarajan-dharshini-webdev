@@ -5,7 +5,7 @@
 
     function profileController($location,
                                currentUser,
-                               userService) {
+                               userService, recipeSearchService) {
         var model = this;
         model.userId = currentUser._id;
         model.update = update;
@@ -15,8 +15,26 @@
 
         function init() {
             renderUser(currentUser);
+            renderRecipes(currentUser);
+            renderFoodTrucks(currentUser);
         }
         init();
+        
+        function renderRecipes(user) {
+            var userId = user._id;
+            recipeSearchService.findRecipesForUser(userId)
+                .then(function (response) {
+                    model.recipes = response;
+                });
+        }
+        
+        function renderFoodTrucks(user) {
+            var userId = user._id;
+            recipeSearchService.findFoodTrucksForUser(userId)
+                .then(function (response) {
+                    model.foodTrucks = response;
+                });
+        }
         
         function unregister(user) {
             userService
