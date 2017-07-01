@@ -32,6 +32,8 @@
                         } else {
                             model.message = "Sorry, " + username + " not found. please try again!";
                         }
+                    },function (status) {
+                        model.message = "Sorry, You could not be logged In!";
                     });
             }
     }
