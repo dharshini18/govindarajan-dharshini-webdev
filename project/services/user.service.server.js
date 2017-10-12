@@ -222,11 +222,11 @@ function findAllUsers(req, res) {
                 if (user) {
                     res.json(user);
                 } else {
-                    res.sendStatus(404);
+                    res.sendStatus(undefined);
                 }
             }, function(error){
                 console.log(error);
-                res.sendStatus(404);
+                res.sendStatus(undefined);
             });
     } else if (username) {
         userModel
@@ -235,7 +235,7 @@ function findAllUsers(req, res) {
                 if (user) {
                     res.json(user);
                 } else {
-                    res.sendStatus(404);
+                    res.sendStatus(undefined);
                 }
             });
     } else {

@@ -18,8 +18,8 @@ app.use(session({secret: process.env.SESSION_SECRET}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./assignment/session/app');
-require('./assignment/app');
+/*require('./assignment/session/app');
+require('./assignment/app');*/
 require('./test/app');
 require('./project/app');
 
